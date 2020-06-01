@@ -1,9 +1,7 @@
-import React, { ReactNode } from "react";
+import React, { ReactElement } from "react";
 
-function App(): ReactNode {
-    return (
-        <div>Hello</div>
-    );
+function App(): ReactElement {
+    return <div>Hello</div>;
 }
 
 export default App;
