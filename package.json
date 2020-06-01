@@ -25,7 +25,7 @@
         "test": "react-scripts test",
         "lint:all": "yarn lint && yarn lint:css && yarn prettier",
         "lint": "eslint . --fix --ext .tsx,.ts --max-warnings=0",
-        "lint:css": "stylelint './src/**/*.css' --max-warnings=0 --fix",
+        "lint:css": "stylelint '**/*.css' --max-warnings=0 --fix",
         "prettier": "prettier --write ."
     },
     "eslintConfig": {
