@@ -7,13 +7,13 @@ html {
 }
 
 html,
-html[theme = "white"] {
+html[theme="white"] {
     --bg-color: white;
     --color: #181818;
     --bg-color-overlay: #f6f6f7;
 }
 
-html[theme = "dark"] {
+html[theme="dark"] {
     --bg-color: #131325;
     --bg-color-overlay: #1e1e30;
     --color: white;
