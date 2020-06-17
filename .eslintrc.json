@@ -189,8 +189,8 @@
         "func-names": ["error", "as-needed"],
         "function-call-argument-newline": ["error", "consistent"],
         "function-paren-newline": "error",
-        "id-blacklist": ["error", "data", "err", "e", "cb", "callback"],
-        "id-length": "warn",
+        "id-blacklist": ["error", "data", "err", "cb", "callback"],
+        // "id-length": "warn",
         // "id-match": ["error", "^[a-z]+([A-Z][a-z]+)*$", {"properties": true,"onlyDeclarations": true}],
         "implicit-arrow-linebreak": "error",
         "indent": [
@@ -246,6 +246,7 @@
         "no-mixed-operators": "error",
         "no-multi-assign": "error",
         "no-multiple-empty-lines": ["error", { "max": 2, "maxEOF": 1 }],
+        // "no-negated-condition": "error",
         "no-nested-ternary": "error",
         "no-plusplus": ["error", { "allowForLoopAfterthoughts": true }],
         "no-trailing-spaces": "error",
@@ -415,7 +416,7 @@
         // "react/jsx-no-literals": ["error", { "ignoreProps": false }],
         "react/jsx-no-script-url": "error",
         "react/jsx-no-useless-fragment": "error",
-        "react/jsx-one-expression-per-line": ["warn", { "allow": "literal" }],
+        // "react/jsx-one-expression-per-line": ["warn", { "allow": "literal" }],
         "react/jsx-pascal-case": "error",
 
         // Add Exceptions only if extremely necessary
