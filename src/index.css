@@ -49,3 +49,18 @@ i {
 header i {
     font-size: var(--h1-size) !important;
 }
+
+header .algo-toggle {
+    display: flex;
+}
+
+header .algo-toggle div {
+    margin-right: 10px;
+    opacity: 0.5;
+    cursor: pointer;
+}
+
+header .algo-toggle div.selected {
+    color: pink;
+    opacity: 1;
+}

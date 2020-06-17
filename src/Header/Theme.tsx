@@ -1,6 +1,6 @@
 import React, { FunctionComponent, useState } from "react";
 
-export const Header: FunctionComponent = () => {
+export const Theme: FunctionComponent = () => {
     const [theme, changeThemeState] = useState(localStorage.getItem("theme"));
 
     const changeTheme = () => {
@@ -22,15 +22,12 @@ export const Header: FunctionComponent = () => {
     };
 
     return (
-        <header>
-            <div>
-                <h1>Sorting Algorithms</h1>
-            </div>
+        <div>
             {theme === "dark" ? (
                 <i aria-hidden="true" className="fa fa-sun-o" onClick={changeTheme} />
             ) : (
                 <i aria-hidden="true" className="fa fa-moon-o" onClick={changeTheme} />
             )}
-        </header>
+        </div>
     );
 };
