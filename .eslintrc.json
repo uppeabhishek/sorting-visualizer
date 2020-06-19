@@ -429,7 +429,8 @@
                 "reservedFirst": true
             }
         ],
-        "react/jsx-tag-spacing": "error"
+        "react/jsx-tag-spacing": "error",
+        "react-hooks/exhaustive-deps": 0
         // JSX Rules End
     }
 }

@@ -5,11 +5,9 @@ import {
     ArraySize,
     CHANGE_ARRAY_SIZE,
     AnimationSpeed,
-    SortingType,
+    ArrayType,
     CHANGE_ANIMATION_SPEED,
-    CHANGE_SORTING_TYPE,
-    GENERATE_NEW_ARRAY,
-    GenerateNewArrayType
+    CHANGE_ARRAY_TYPE
 } from "./types";
 
 export const changeDefaultAlgorithm = (algorithm: AlgorithmType): GlobalTypes => ({
@@ -27,12 +25,7 @@ export const changeAnimationSpeed = (animationSpeed: AnimationSpeed): GlobalType
     type: CHANGE_ANIMATION_SPEED
 });
 
-export const changeSortingType = (sortingType: SortingType): GlobalTypes => ({
-    sortingType,
-    type: CHANGE_SORTING_TYPE
-});
-
-export const generateNewArray = (generate: GenerateNewArrayType): GlobalTypes => ({
-    generate,
-    type: GENERATE_NEW_ARRAY
+export const changeArrayType = (arrayType: ArrayType): GlobalTypes => ({
+    arrayType,
+    type: CHANGE_ARRAY_TYPE
 });

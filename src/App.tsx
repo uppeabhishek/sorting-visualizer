@@ -1,28 +1,40 @@
-import React, { ReactElement, useEffect, useState } from "react";
-import { Header } from "./Header";
+import React, { ReactElement } from "react";
+import { Header } from "./components/Header";
+import { ArrayBlocks } from "./components/ArrayBlocks";
 
 function App(): ReactElement {
-    const [isLoading, toggleLoading] = useState(true);
+    // Const [isLoading, toggleLoading] = useState(false);
 
-    useEffect(() => {
-        const html = document.querySelector("html");
+    /*
+     * UseEffect(() => {
+     *     const html = document.querySelector("html");
+     */
 
-        if (html) {
-            let value = "";
-            const theme = localStorage.getItem("theme");
+    /*
+     *     If (html) {
+     *         let value = "";
+     *         const theme = localStorage.getItem("theme");
+     */
 
-            if (theme === null) {
-                value = "dark";
-                localStorage.setItem("theme", "dark");
-            } else {
-                value = theme;
-            }
-            html.setAttribute("theme", value);
-            toggleLoading(false);
-        }
-    }, []);
+    /*
+     *         If (theme === null) {
+     *             value = "dark";
+     *             localStorage.setItem("theme", "dark");
+     *         } else {
+     *             value = theme;
+     *         }
+     *         html.setAttribute("theme", value);
+     *         toggleLoading(false);
+     *     }
+     * }, []);
+     */
 
-    return !isLoading ? <Header /> : <div />;
+    return (
+        <>
+            <Header />
+            <ArrayBlocks key="1" />
+        </>
+    );
 }
 
 export default App;

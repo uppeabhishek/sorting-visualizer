@@ -1,7 +1,7 @@
 import React, { FunctionComponent, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../reducers";
-import { changeDefaultAlgorithm } from "../actions/globals";
+import { RootState } from "../../reducers";
+import { changeDefaultAlgorithm } from "../../actions/globals";
 
 export const AlgorithmToggle: FunctionComponent = () => {
     const algorithms = useRef([
@@ -32,7 +32,7 @@ export const AlgorithmToggle: FunctionComponent = () => {
     const dispatch = useDispatch();
 
     return (
-        <div className="algo-toggle d-flex">
+        <div key={defaultAlgorithm} className="algo-toggle d-flex">
             {algorithms.current.map((algo: { name: string; minifiedName: string }) =>
                 defaultAlgorithm === algo.name ? (
                     <div key={algo.name} className="selected" title={algo.name}>
