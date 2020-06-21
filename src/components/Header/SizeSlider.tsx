@@ -9,7 +9,7 @@ export const SizeSlider: FunctionComponent = () => {
     const dispatch = useDispatch();
 
     function changeArraySizeFunc(e: ChangeEvent<HTMLInputElement>) {
-        dispatch(changeArraySize(parseInt(e.currentTarget.value)));
+        dispatch(changeArraySize(parseInt(e.currentTarget.value, 10)));
     }
 
     return (

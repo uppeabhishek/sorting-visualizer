@@ -114,7 +114,7 @@
         "no-labels": "error",
         "no-lone-blocks": "error",
         "no-loop-func": "error",
-        "no-magic-numbers": "warn",
+        // "no-magic-numbers": "warn",
         "no-multi-spaces": "error",
         "no-new": "error",
         "no-new-func": "error",

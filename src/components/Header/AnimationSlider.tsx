@@ -9,7 +9,7 @@ export const AnimationSlider: FunctionComponent = () => {
     const animationSpeed = useSelector((state: RootState) => state.globals.animationSpeed);
 
     function changeAnimationSpeedFunc(e: ChangeEvent<HTMLInputElement>) {
-        dispatch(changeAnimationSpeed(parseInt(e.currentTarget.value)));
+        dispatch(changeAnimationSpeed(parseInt(e.currentTarget.value, 10)));
     }
 
     return (
