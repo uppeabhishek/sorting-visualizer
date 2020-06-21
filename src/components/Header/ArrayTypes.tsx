@@ -9,13 +9,14 @@ export const ArrayTypes: FunctionComponent = () => {
     const dispatch = useDispatch();
 
     const arrayType = useSelector((state: RootState) => state.globals.arrayType);
+    const isSorting = useSelector((state: RootState) => state.globals.sort);
 
     function changeArrayTypeFunc(e: ChangeEvent<HTMLSelectElement>) {
         dispatch(changeArrayType(e.currentTarget.value));
     }
 
     return (
-        <select key={arrayType} value={arrayType} onChange={changeArrayTypeFunc}>
+        <select key={arrayType} className={isSorting? 'disabled': ''} value={arrayType} onChange={changeArrayTypeFunc}>
             {types.map((type) => (
                 <option key={type}>{type}</option>
             ))}

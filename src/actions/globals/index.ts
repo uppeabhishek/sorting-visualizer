@@ -7,7 +7,9 @@ import {
     AnimationSpeed,
     ArrayType,
     CHANGE_ANIMATION_SPEED,
-    CHANGE_ARRAY_TYPE
+    CHANGE_ARRAY_TYPE,
+    SortAlgorithm,
+    SORT_ALGORITHM
 } from "./types";
 
 export const changeDefaultAlgorithm = (algorithm: AlgorithmType): GlobalTypes => ({
@@ -28,4 +30,9 @@ export const changeAnimationSpeed = (animationSpeed: AnimationSpeed): GlobalType
 export const changeArrayType = (arrayType: ArrayType): GlobalTypes => ({
     arrayType,
     type: CHANGE_ARRAY_TYPE
+});
+
+export const sortAlgorithm = (sort: SortAlgorithm): GlobalTypes => ({
+    sort,
+    type: SORT_ALGORITHM
 });

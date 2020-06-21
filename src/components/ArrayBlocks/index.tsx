@@ -2,14 +2,11 @@ import React, { FunctionComponent, useRef, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "../../reducers";
 import { useWindowSize } from "../../hooks/useWindowSize";
+import { BubbleSort } from "../../algorithms/BubbleSort";
+import { getRandomInt } from "../Helper";
 
 export const ArrayBlocks: FunctionComponent = () => {
-    // Don't destructure as destructing will cause the whole object to rerender
 
-    /*
-     * Const algorithm = useSelector((state: RootState)=> state.globals.algorithm);
-     * const animationSpeed = useSelector((state: RootState)=> state.globals.animationSpeed);
-     */
     let arraySize = useSelector((state: RootState) => state.globals.arraySize);
     const arrayType = useSelector((state: RootState) => state.globals.arrayType);
 
@@ -24,13 +21,6 @@ export const ArrayBlocks: FunctionComponent = () => {
     const maxRange = useRef(100);
 
     const [remainingHeightWidth, setRemainingHeightWidth] = useState([0, 0]);
-
-    function getRandomInt(min: number, max: number) {
-        min = Math.ceil(min);
-        max = Math.floor(max);
-
-        return Math.floor(Math.random() * (max - min)) + min; // The maximum is exclusive and the minimum is inclusive
-    }
 
     function getRandomArrayElements() {
         const array: number[] = [];
@@ -114,8 +104,20 @@ export const ArrayBlocks: FunctionComponent = () => {
         }
     }, []);
 
+    const svgRef = useRef<SVGSVGElement>(null);
+
+    const isSorting = useSelector((state: RootState) => state.globals.sort);
+
+    useEffect(()=>{
+        if (isSorting && svgRef) {
+            BubbleSort(arrayElements, svgRef);
+        }
+    },[isSorting]);
+
+
     return remainingHeightWidth[0] !== 0 ? (
         <svg
+            ref={svgRef}
             height={height}
             style={{
                 paddingBottom: paddingTopBottom.current,
@@ -128,29 +130,28 @@ export const ArrayBlocks: FunctionComponent = () => {
         >
             {arrayElements.map((eachElement: number, index: number) => {
                 const eachElementHeight = (eachElement * height) / maxRange.current;
-
+                
                 return (
                     <g key={index}>
                         <rect
                             height={eachElementHeight}
                             style={{
-                                fill: "blue",
-                                fillOpacity: 0.1,
+                                fill: "#251b12",
                                 stroke: "pink",
                                 strokeOpacity: 0.9,
-                                strokeWidth: 5
+                                strokeWidth: 2
                             }}
                             width={eachElementWidth}
                             x={index * eachElementWidth}
                             y={height - eachElementHeight}
                         />
-                        <text
+                        {/* <text
                             style={{ fill: "white" }}
                             x={index * eachElementWidth + eachElementWidth / 2}
                             y={height - eachElementHeight + 50}
                         >
                             {eachElement}
-                        </text>
+                        </text> */}
                     </g>
                 );
             })}

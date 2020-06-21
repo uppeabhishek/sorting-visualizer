@@ -5,6 +5,7 @@ import { changeArraySize } from "../../actions/globals";
 
 export const SizeSlider: FunctionComponent = () => {
     const arraySize = useSelector((state: RootState) => state.globals.arraySize);
+    const isSorting = useSelector((state: RootState) => state.globals.sort);
 
     const dispatch = useDispatch();
 
@@ -15,6 +16,7 @@ export const SizeSlider: FunctionComponent = () => {
     return (
         <div>
             <input
+                className={isSorting? 'disabled': ''}
                 max="100"
                 min="1"
                 type="range"

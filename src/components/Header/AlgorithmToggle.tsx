@@ -28,11 +28,12 @@ export const AlgorithmToggle: FunctionComponent = () => {
     ]);
 
     const defaultAlgorithm = useSelector((state: RootState) => state.globals.algorithm);
+    const isSorting = useSelector((state: RootState) => state.globals.sort);
 
     const dispatch = useDispatch();
 
     return (
-        <div key={defaultAlgorithm} className="algo-toggle d-flex">
+        <div key={defaultAlgorithm} className={isSorting? 'disabled algo-toggle d-flex': 'algo-toggle d-flex'}>
             {algorithms.current.map((algo: { name: string; minifiedName: string }) =>
                 defaultAlgorithm === algo.name ? (
                     <div key={algo.name} className="selected" title={algo.name}>
