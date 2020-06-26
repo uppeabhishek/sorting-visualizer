@@ -6,6 +6,8 @@ export const SortButton: FunctionComponent = () => {
     const dispatch = useDispatch();
 
     return (
-        <button type="button" onClick={() => dispatch(sortAlgorithm(true))}>Sort</button>
-    );          
+        <button type="button" onClick={() => dispatch(sortAlgorithm(true))}>
+            Sort
+        </button>
+    );
 };

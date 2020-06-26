@@ -16,7 +16,7 @@ export const SizeSlider: FunctionComponent = () => {
     return (
         <div>
             <input
-                className={isSorting? 'disabled': ''}
+                className={isSorting ? "disabled" : ""}
                 max="100"
                 min="1"
                 type="range"

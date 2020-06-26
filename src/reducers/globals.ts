@@ -46,7 +46,7 @@ const globals = (state = initialState, action: GlobalTypes): GlobalState => {
             return {
                 ...state,
                 sort: action.sort
-            }
+            };
         }
         default: {
             return {

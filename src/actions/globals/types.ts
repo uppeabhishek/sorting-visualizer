@@ -28,8 +28,8 @@ export interface ChangeArrayType {
 }
 
 export interface SortAlgorithmType {
-    type: typeof SORT_ALGORITHM,
-    sort: SortAlgorithm
+    type: typeof SORT_ALGORITHM;
+    sort: SortAlgorithm;
 }
 
 export type GlobalTypes =

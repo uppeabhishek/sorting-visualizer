@@ -100,3 +100,8 @@ button {
     pointer-events: none;
     opacity: 0.5;
 }
+
+svg,
+g {
+    transition: all 0.7s ease-in-out;
+}

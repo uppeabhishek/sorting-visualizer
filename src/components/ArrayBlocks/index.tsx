@@ -6,7 +6,6 @@ import { BubbleSort } from "../../algorithms/BubbleSort";
 import { getRandomInt } from "../Helper";
 
 export const ArrayBlocks: FunctionComponent = () => {
-
     let arraySize = useSelector((state: RootState) => state.globals.arraySize);
     const arrayType = useSelector((state: RootState) => state.globals.arrayType);
 
@@ -108,12 +107,11 @@ export const ArrayBlocks: FunctionComponent = () => {
 
     const isSorting = useSelector((state: RootState) => state.globals.sort);
 
-    useEffect(()=>{
+    useEffect(() => {
         if (isSorting && svgRef) {
             BubbleSort(arrayElements, svgRef);
         }
-    },[isSorting]);
-
+    }, [isSorting]);
 
     return remainingHeightWidth[0] !== 0 ? (
         <svg
@@ -130,9 +128,16 @@ export const ArrayBlocks: FunctionComponent = () => {
         >
             {arrayElements.map((eachElement: number, index: number) => {
                 const eachElementHeight = (eachElement * height) / maxRange.current;
-                
+
                 return (
-                    <g key={index}>
+                    <g
+                        // eslint-disable-line react/no-array-index-key
+                        key={index}
+                        // eslint-enable-line react/no-array-index-key
+                        transform={`translate(${index * eachElementWidth} ${
+                            height - eachElementHeight
+                        })`}
+                    >
                         <rect
                             height={eachElementHeight}
                             style={{
@@ -142,8 +147,6 @@ export const ArrayBlocks: FunctionComponent = () => {
                                 strokeWidth: 2
                             }}
                             width={eachElementWidth}
-                            x={index * eachElementWidth}
-                            y={height - eachElementHeight}
                         />
                         {/* <text
                             style={{ fill: "white" }}
