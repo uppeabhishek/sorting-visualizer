@@ -4,4 +4,41 @@ export const arrayItemNotEqualColor = "red";
 export const arrayItemEqualColor = "green";
 export const arrayItemSortedColor = "hotpink";
 
-export function timer(ms: number) { return new Promise(res => setTimeout(res, ms)); }
+export function timer(ms: number) { 
+    return new Promise(res => setTimeout(res, ms)); 
+}
+
+export function swapSVGNodes (svgChildren1: SVGGElement, svgChildren2: SVGGElement) {
+
+    const { parentNode } = svgChildren2;
+
+    if (parentNode) {
+        parentNode.insertBefore(svgChildren2, svgChildren1);
+    }
+
+    const first = svgChildren1.transform.baseVal.getItem(0);
+    let firstX = 0;
+    let firstY = 0;
+    
+    if (first.type === SVGTransform.SVG_TRANSFORM_TRANSLATE) {
+        firstX = first.matrix.e;
+        firstY = first.matrix.f;
+    }
+
+    const second = svgChildren2.transform.baseVal.getItem(0);
+    let secondX = 0;
+    let secondY = 0;
+
+    if (second.type === SVGTransform.SVG_TRANSFORM_TRANSLATE) {
+        secondX = second.matrix.e;
+        secondY = second.matrix.f;
+    }
+
+    svgChildren2.transform.baseVal
+            .getItem(0)
+            .setTranslate(firstX, secondY);
+    svgChildren1.transform.baseVal
+        .getItem(0)
+        .setTranslate(secondX, firstY);
+
+}

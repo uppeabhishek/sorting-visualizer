@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../../reducers";
 import { useWindowSize } from "../../hooks/useWindowSize";
 import { BubbleSort } from "../../algorithms/BubbleSort";
+import { SelectionSort } from "../../algorithms/SelectionSort";
 import { getRandomInt } from "../Helper";
 import {arrayItemOriginalColor} from '../../commonUtilities'
 import { sortAlgorithm } from "../../actions/globals";
@@ -113,14 +114,35 @@ export const ArrayBlocks: FunctionComponent = () => {
 
     const animationSpeed = useSelector((state: RootState) => state.globals.animationSpeed)*5;
 
-    const currentSort = useState();
+    const defaultAlgorithm = useSelector((state: RootState) => state.globals.algorithm);
+
     useEffect(() => {
         if (isSorting && svgRef) {
-            BubbleSort(arrayElements, svgRef, animationSpeed).then((ele)=>{
-                if (ele) {
-                    dispatch(sortAlgorithm(false));
-                }
-            });
+             // @ts-ignore
+            let svgChildren: HTMLCollectionOf<SVGGElement> = null;
+
+            if (svgRef.current) {
+                svgChildren = svgRef.current.children as HTMLCollectionOf<SVGGElement>;
+            }
+
+            switch(defaultAlgorithm) {
+                case "Bubble Sort":
+                    BubbleSort(arrayElements, svgChildren, animationSpeed).then((ele)=>{
+                        if (ele) {
+                            dispatch(sortAlgorithm(false));
+                        }
+                    });
+                    break;
+                case "Selection Sort":
+                    SelectionSort(arrayElements, svgChildren, animationSpeed).then((ele)=>{
+                        if (ele) {
+                            dispatch(sortAlgorithm(false));
+                        }
+                    })
+                    break;
+                default:
+                    break;
+            }
         }
     }, [isSorting]);
 
