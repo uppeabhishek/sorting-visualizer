@@ -1,9 +1,11 @@
 import React, { FunctionComponent, useRef, useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../../reducers";
 import { useWindowSize } from "../../hooks/useWindowSize";
 import { BubbleSort } from "../../algorithms/BubbleSort";
 import { getRandomInt } from "../Helper";
+import {arrayItemOriginalColor} from '../../commonUtilities'
+import { sortAlgorithm } from "../../actions/globals";
 
 export const ArrayBlocks: FunctionComponent = () => {
     let arraySize = useSelector((state: RootState) => state.globals.arraySize);
@@ -107,9 +109,18 @@ export const ArrayBlocks: FunctionComponent = () => {
 
     const isSorting = useSelector((state: RootState) => state.globals.sort);
 
+    const dispatch = useDispatch();
+
+    const animationSpeed = useSelector((state: RootState) => state.globals.animationSpeed)*5;
+
+    const currentSort = useState();
     useEffect(() => {
         if (isSorting && svgRef) {
-            BubbleSort(arrayElements, svgRef);
+            BubbleSort(arrayElements, svgRef, animationSpeed).then((ele)=>{
+                if (ele) {
+                    dispatch(sortAlgorithm(false));
+                }
+            });
         }
     }, [isSorting]);
 
@@ -141,7 +152,7 @@ export const ArrayBlocks: FunctionComponent = () => {
                         <rect
                             height={eachElementHeight}
                             style={{
-                                fill: "#251b12",
+                                fill: arrayItemOriginalColor,
                                 stroke: "pink",
                                 strokeOpacity: 0.9,
                                 strokeWidth: 2
