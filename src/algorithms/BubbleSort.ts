@@ -14,17 +14,17 @@ export function BubbleSort(arr: number[], svgRef: RefObject<SVGSVGElement>) {
         svgChildren = svgRef.current.children as HTMLCollectionOf<SVGGElement>;
     }
 
-    const timeout = 300;
+    const timeout = 900;
 
-    // Const numberOfSwaps = 3;
+    const numberOfSwaps = 3;
 
-    // Const eachSwapTime = timeout / numberOfSwaps;
+    const eachSwapTime = timeout / numberOfSwaps;
 
     if (svgChildren) {
         for (let i = 0; i < len; i++) {
             setTimeout(() => {
                 for (let j = 0; j < len - i - 1; j++) {
-                    setTimeout(function () {
+                    setTimeout(() => { 
                         const rect1 = svgChildren[j].children as HTMLCollectionOf<
                             SVGRectElement | SVGTextElement
                         >;
@@ -42,58 +42,63 @@ export function BubbleSort(arr: number[], svgRef: RefObject<SVGSVGElement>) {
                         firstRect.style.fill = "blue";
                         secondRect.style.fill = "blue";
 
-                        // SetTimeout(()=> {
-                        if (arr[j] > arr[j + 1]) {
-                            // If they are not in correct position
-                            firstRect.style.fill = "red";
-                            secondRect.style.fill = "red";
+                        setTimeout(function() {
+                            if (arr[j] > arr[j + 1]) {
+                                // If they are not in correct position
+                                firstRect.style.fill = "red";
+                                secondRect.style.fill = "red";
 
-                            // IsSwapped = true;
-                            [arr[j], arr[j + 1]] = [arr[j + 1], arr[j]];
+                                setTimeout(() => {
+                                    // IsSwapped = true;
+                                    [arr[j], arr[j + 1]] = [arr[j + 1], arr[j]];
 
-                            // Swap SVG Elements;
-                            const { parentNode } = svgChildren[j + 1];
+                                    // Swap SVG Elements;
+                                    const { parentNode } = svgChildren[j + 1];
 
-                            if (parentNode) {
-                                parentNode.insertBefore(svgChildren[j + 1], svgChildren[j]);
+                                    if (parentNode) {
+                                        parentNode.insertBefore(svgChildren[j + 1], svgChildren[j]);
+                                    }
+
+                                    const first = svgChildren[j].transform.baseVal.getItem(0);
+                                    let firstX = 0;
+                                    let firstY = 0;
+                                    
+                                    if (first.type === SVGTransform.SVG_TRANSFORM_TRANSLATE) {
+                                        firstX = first.matrix.e;
+                                        firstY = first.matrix.f;
+                                    }
+
+                                    const second = svgChildren[j + 1].transform.baseVal.getItem(0);
+                                    let secondX = 0;
+                                    let secondY = 0;
+
+                                    if (second.type === SVGTransform.SVG_TRANSFORM_TRANSLATE) {
+                                        secondX = second.matrix.e;
+                                        secondY = second.matrix.f;
+                                    }
+
+                                    svgChildren[j + 1].transform.baseVal
+                                        .getItem(0)
+                                        .setTranslate(firstX, secondY);
+                                    svgChildren[j].transform.baseVal
+                                        .getItem(0)
+                                        .setTranslate(secondX, firstY);
+
+                                }, eachSwapTime);
+                            } else {
+                                // If elements are in correct position
+                                setTimeout(() => {
+                                    firstRect.style.fill = "green";
+                                    secondRect.style.fill = "green";
+                                }, eachSwapTime);
                             }
+                            firstRect.style.fill = prevFilled1;
+                            secondRect.style.fill = prevFilled2;
+                        }, eachSwapTime);
 
-                            const first = svgChildren[j].transform.baseVal.getItem(0);
-                            let firstX = 0;
-                            let firstY = 0;
-
-                            if (first.type === SVGTransform.SVG_TRANSFORM_TRANSLATE) {
-                                firstX = first.matrix.e;
-                                firstY = first.matrix.f;
-                            }
-
-                            const second = svgChildren[j + 1].transform.baseVal.getItem(0);
-                            let secondX = 0;
-                            let secondY = 0;
-
-                            if (second.type === SVGTransform.SVG_TRANSFORM_TRANSLATE) {
-                                secondX = second.matrix.e;
-                                secondY = second.matrix.f;
-                            }
-
-                            svgChildren[j + 1].transform.baseVal
-                                .getItem(0)
-                                .setTranslate(firstX, secondY);
-                            svgChildren[j].transform.baseVal
-                                .getItem(0)
-                                .setTranslate(secondX, firstY);
-                        } else {
-                            // If elements are in correct position
-                            firstRect.style.fill = "green";
-                            secondRect.style.fill = "green";
-                        }
-                        firstRect.style.fill = prevFilled1;
-                        secondRect.style.fill = prevFilled2;
-
-                        // }, (timeout * (j+1)) + eachSwapTime);
-                    }, (j + 1) * timeout);
+                    }, j * timeout);
                 }
-            }, i * timeout * len - i - 1);
+            }, (i) * timeout * (len - i));
         }
     }
 }
