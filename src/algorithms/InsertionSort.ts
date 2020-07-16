@@ -66,19 +66,27 @@ export async function InsertionSort(
                     currentSVGElement = svgChildren[i].children as HTMLCollectionOf<
                         SVGRectElement | SVGTextElement
                     >;
-
                     currentElementIndex = i;
+
                 } else {
                     secondElement[0].style.fill = arrayItemEqualColor;
                     await timer(animationSpeed);
 
                     currentSVGElement[0].style.fill = arrayItemOriginalColor;
                     secondElement[0].style.fill = arrayItemOriginalColor;
-                }
 
-                await timer(animationSpeed);
+                    await timer(animationSpeed);
+                }
             }
         }
+
+        // for (let i=0; i<len; i++) {
+        //     const currentElement = svgChildren[i].children as HTMLCollectionOf<
+        //                 SVGRectElement | SVGTextElement>;
+        //     currentElement[i].style.fill = arrayItemSortedColor;
+        //     await timer(animationSpeed);
+        //     console.log(i);
+        // }
     }
 
     function func() {
