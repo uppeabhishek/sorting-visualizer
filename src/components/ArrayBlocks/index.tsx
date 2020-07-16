@@ -7,6 +7,7 @@ import { SelectionSort } from "../../algorithms/SelectionSort";
 import { getRandomInt } from "../Helper";
 import { arrayItemOriginalColor } from "../../commonUtilities";
 import { sortAlgorithm } from "../../actions/globals";
+import { InsertionSort } from "../../algorithms/InsertionSort";
 
 export const ArrayBlocks: FunctionComponent = () => {
     let arraySize = useSelector((state: RootState) => state.globals.arraySize);
@@ -140,6 +141,12 @@ export const ArrayBlocks: FunctionComponent = () => {
                     SelectionSort(arrayElements, svgChildren, animationSpeed).then((ele) => {
                         if (ele) {
                             dispatch(sortAlgorithm(false));
+                        }
+                    });
+                    break;
+                case "Insertion Sort":
+                    InsertionSort(arrayElements, svgChildren, animationSpeed).then((ele) => {
+                        if (ele) {
                         }
                     });
                     break;

@@ -6,7 +6,7 @@ import { AnimationSlider } from "./AnimationSlider";
 import { SortButton } from "./Sort";
 
 export const Header: FunctionComponent = () => (
-    <header>
+    <header style={{ maxWidth: "100%", overflowX: "auto" }}>
         <AlgorithmToggle />
         <ArrayTypes />
         <SizeSlider />
