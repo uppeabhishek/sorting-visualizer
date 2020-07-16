@@ -5,7 +5,7 @@ import { useWindowSize } from "../../hooks/useWindowSize";
 import { BubbleSort } from "../../algorithms/BubbleSort";
 import { SelectionSort } from "../../algorithms/SelectionSort";
 import { getRandomInt } from "../Helper";
-import {arrayItemOriginalColor} from '../../commonUtilities'
+import { arrayItemOriginalColor } from "../../commonUtilities";
 import { sortAlgorithm } from "../../actions/globals";
 
 export const ArrayBlocks: FunctionComponent = () => {
@@ -112,33 +112,36 @@ export const ArrayBlocks: FunctionComponent = () => {
 
     const dispatch = useDispatch();
 
-    const animationSpeed = useSelector((state: RootState) => state.globals.animationSpeed) * 5;
+    let animationSpeed = useSelector((state: RootState) => state.globals.animationSpeed);
+
+    // As animationSpeed increase decrease its value because slow ---> fast
+    animationSpeed = 10 * (100 - animationSpeed);
 
     const defaultAlgorithm = useSelector((state: RootState) => state.globals.algorithm);
 
     useEffect(() => {
         if (isSorting && svgRef) {
-             // @ts-ignore
+            // @ts-ignore
             let svgChildren: HTMLCollectionOf<SVGGElement> = null;
 
             if (svgRef.current) {
                 svgChildren = svgRef.current.children as HTMLCollectionOf<SVGGElement>;
             }
 
-            switch(defaultAlgorithm) {
+            switch (defaultAlgorithm) {
                 case "Bubble Sort":
-                    BubbleSort(arrayElements, svgChildren, animationSpeed).then((ele)=>{
+                    BubbleSort(arrayElements, svgChildren, animationSpeed).then((ele) => {
                         if (ele) {
                             dispatch(sortAlgorithm(false));
                         }
                     });
                     break;
                 case "Selection Sort":
-                    SelectionSort(arrayElements, svgChildren, animationSpeed).then((ele)=>{
+                    SelectionSort(arrayElements, svgChildren, animationSpeed).then((ele) => {
                         if (ele) {
                             dispatch(sortAlgorithm(false));
                         }
-                    })
+                    });
                     break;
                 default:
                     break;

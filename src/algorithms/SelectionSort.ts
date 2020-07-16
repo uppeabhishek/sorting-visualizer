@@ -1,12 +1,25 @@
-import {timer, arrayItemOriginalColor,arrayItemCurrentPositionColor, arrayItemEqualColor,arrayItemSortedColor, swapSVGNodes} from '../commonUtilities'
+import {
+    timer,
+    arrayItemOriginalColor,
+    arrayItemCurrentPositionColor,
+    arrayItemEqualColor,
+    arrayItemSortedColor,
+    swapSVGNodes
+} from "../commonUtilities";
 
-export async function SelectionSort(arr: number[], svgChildren: HTMLCollectionOf<SVGGElement>, animationSpeed: number) {
+export async function SelectionSort(
+    arr: number[],
+    svgChildren: HTMLCollectionOf<SVGGElement>,
+    animationSpeed: number
+) {
     const len = arr.length;
 
     async function sort() {
         let i;
-        for (i=0;i<len-1;i++)  {
-            let min = arr[i], minIndex = i;
+
+        for (i = 0; i < len - 1; i++) {
+            let min = arr[i];
+            let minIndex = i;
 
             let minRect = svgChildren[minIndex].children as HTMLCollectionOf<
                 SVGRectElement | SVGTextElement
@@ -14,14 +27,13 @@ export async function SelectionSort(arr: number[], svgChildren: HTMLCollectionOf
 
             minRect[0].style.fill = arrayItemEqualColor;
 
-            for (let j=i+1; j<len; j++) {
-               
+            for (let j = i + 1; j < len; j++) {
                 const currentRect = svgChildren[j].children as HTMLCollectionOf<
                     SVGRectElement | SVGTextElement
                 >;
-            
+
                 currentRect[0].style.fill = arrayItemCurrentPositionColor;
-                
+
                 await timer(animationSpeed);
 
                 if (arr[j] < min) {
@@ -29,14 +41,13 @@ export async function SelectionSort(arr: number[], svgChildren: HTMLCollectionOf
                     minRect[0].style.fill = arrayItemOriginalColor;
                     currentRect[0].style.fill = arrayItemEqualColor;
                     minRect = currentRect;
-                     
+
                     min = arr[j];
                     minIndex = j;
-                }
-                else {
+                } else {
                     currentRect[0].style.fill = arrayItemOriginalColor;
                 }
-                await timer(animationSpeed);        
+                await timer(animationSpeed);
             }
 
             [arr[i], arr[minIndex]] = [arr[minIndex], arr[i]];
@@ -44,8 +55,9 @@ export async function SelectionSort(arr: number[], svgChildren: HTMLCollectionOf
             swapSVGNodes(svgChildren[i], svgChildren[minIndex]);
 
             const firstRect = svgChildren[i].children as HTMLCollectionOf<
-                    SVGRectElement | SVGTextElement
-                >;
+                SVGRectElement | SVGTextElement
+            >;
+
             firstRect[0].style.fill = arrayItemSortedColor;
 
             await timer(animationSpeed);
@@ -55,15 +67,14 @@ export async function SelectionSort(arr: number[], svgChildren: HTMLCollectionOf
         const firstRect = svgChildren[i].children as HTMLCollectionOf<
             SVGRectElement | SVGTextElement
         >;
+
         firstRect[0].style.fill = arrayItemSortedColor;
     }
 
     function func() {
-        return sort().then(()=>{
-                return true;
-            }).catch((err)=>{
-                return err;
-            })
+        return sort()
+            .then(() => true)
+            .catch((err) => err);
     }
 
     return func();

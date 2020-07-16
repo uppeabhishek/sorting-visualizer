@@ -9,9 +9,9 @@ import {
 } from "../actions/globals/types";
 
 const initialState: GlobalState = {
-    algorithm: "Selection Sort",
+    algorithm: "Bubble Sort",
     animationSpeed: 50,
-    arraySize: 14,
+    arraySize: 50,
     arrayType: "Randomize",
     sort: false
 };

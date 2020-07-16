@@ -15,13 +15,19 @@ export const AnimationSlider: FunctionComponent = () => {
     const isSorting = useSelector((state: RootState) => state.globals.sort);
 
     return (
-        <div className={isSorting ? "disabled d-flex flex-column justify-center align-center" : "d-flex flex-column justify-center align-center"}>
+        <div
+            className={
+                isSorting
+                    ? "disabled d-flex flex-column justify-center align-center"
+                    : "d-flex flex-column justify-center align-center"
+            }
+        >
             <div className="d-flex justify-center align-center">
                 <div>Slow</div>
                 <input
-                    style={{cursor: "pointer"}}
-                    max="100"
+                    max="90"
                     min="10"
+                    style={{ cursor: "pointer" }}
                     type="range"
                     value={animationSpeed}
                     onChange={changeAnimationSpeedFunc}

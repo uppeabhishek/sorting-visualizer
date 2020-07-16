@@ -4,17 +4,16 @@ export const arrayItemNotEqualColor = "red";
 export const arrayItemEqualColor = "green";
 export const arrayItemSortedColor = "hotpink";
 
-export function timer(ms: number) { 
-    return new Promise(res => setTimeout(res, ms)); 
+export function timer(ms: number) {
+    return new Promise((res) => setTimeout(res, ms));
 }
 
-export function swapSVGNodes (svgChildren1: SVGGElement, svgChildren2: SVGGElement) {
-
+export function swapSVGNodes(svgChildren1: SVGGElement, svgChildren2: SVGGElement) {
     const { parentNode } = svgChildren1;
 
     const firstChild = svgChildren1;
     const secondChild = svgChildren2;
-    const nextSibling = svgChildren2.nextSibling;
+    const { nextSibling } = svgChildren2;
 
     if (parentNode) {
         parentNode.insertBefore(secondChild, firstChild);
@@ -24,7 +23,7 @@ export function swapSVGNodes (svgChildren1: SVGGElement, svgChildren2: SVGGEleme
     const first = svgChildren1.transform.baseVal.getItem(0);
     let firstX = 0;
     let firstY = 0;
-    
+
     if (first.type === SVGTransform.SVG_TRANSFORM_TRANSLATE) {
         firstX = first.matrix.e;
         firstY = first.matrix.f;
@@ -39,11 +38,6 @@ export function swapSVGNodes (svgChildren1: SVGGElement, svgChildren2: SVGGEleme
         secondY = second.matrix.f;
     }
 
-    svgChildren2.transform.baseVal
-            .getItem(0)
-            .setTranslate(firstX, secondY);
-    svgChildren1.transform.baseVal
-        .getItem(0)
-        .setTranslate(secondX, firstY);
-
+    svgChildren2.transform.baseVal.getItem(0).setTranslate(firstX, secondY);
+    svgChildren1.transform.baseVal.getItem(0).setTranslate(secondX, firstY);
 }

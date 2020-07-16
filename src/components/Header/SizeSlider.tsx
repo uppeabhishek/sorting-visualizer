@@ -16,10 +16,10 @@ export const SizeSlider: FunctionComponent = () => {
     return (
         <div>
             <input
-                style={{cursor: "pointer"}}
                 className={isSorting ? "disabled" : ""}
                 max="100"
                 min="1"
+                style={{ cursor: "pointer" }}
                 type="range"
                 value={arraySize}
                 onChange={changeArraySizeFunc}
