@@ -19,6 +19,7 @@ export const AnimationSlider: FunctionComponent = () => {
             <div className="d-flex justify-center align-center">
                 <div>Slow</div>
                 <input
+                    style={{cursor: "pointer"}}
                     max="100"
                     min="10"
                     type="range"

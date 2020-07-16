@@ -1,10 +1,11 @@
-import {timer, arrayItemOriginalColor,arrayItemNotEqualColor,arrayItemCurrentPositionColor, arrayItemEqualColor,arrayItemSortedColor, swapSVGNodes} from '../commonUtilities'
+import {timer, arrayItemOriginalColor,arrayItemCurrentPositionColor, arrayItemEqualColor,arrayItemSortedColor, swapSVGNodes} from '../commonUtilities'
 
 export async function SelectionSort(arr: number[], svgChildren: HTMLCollectionOf<SVGGElement>, animationSpeed: number) {
     const len = arr.length;
 
     async function sort() {
-        for (let i=0;i<len-1;i++)  {
+        let i;
+        for (i=0;i<len-1;i++)  {
             let min = arr[i], minIndex = i;
 
             let minRect = svgChildren[minIndex].children as HTMLCollectionOf<
@@ -35,19 +36,26 @@ export async function SelectionSort(arr: number[], svgChildren: HTMLCollectionOf
                 else {
                     currentRect[0].style.fill = arrayItemOriginalColor;
                 }
-
-                await timer(animationSpeed);
-
-                console.log (arr[i], arr[minIndex]);
-
-                [arr[i], arr[minIndex]] = [arr[minIndex], arr[i]];
-
-                swapSVGNodes(svgChildren[i], svgChildren[minIndex]);
-
-                await timer(animationSpeed);
+                await timer(animationSpeed);        
             }
+
+            [arr[i], arr[minIndex]] = [arr[minIndex], arr[i]];
+
+            swapSVGNodes(svgChildren[i], svgChildren[minIndex]);
+
+            const firstRect = svgChildren[i].children as HTMLCollectionOf<
+                    SVGRectElement | SVGTextElement
+                >;
+            firstRect[0].style.fill = arrayItemSortedColor;
+
+            await timer(animationSpeed);
         }
-        console.log(arr);        
+
+        // Paint last element as sorted
+        const firstRect = svgChildren[i].children as HTMLCollectionOf<
+            SVGRectElement | SVGTextElement
+        >;
+        firstRect[0].style.fill = arrayItemSortedColor;
     }
 
     function func() {

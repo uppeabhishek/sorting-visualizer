@@ -10,10 +10,15 @@ export function timer(ms: number) {
 
 export function swapSVGNodes (svgChildren1: SVGGElement, svgChildren2: SVGGElement) {
 
-    const { parentNode } = svgChildren2;
+    const { parentNode } = svgChildren1;
+
+    const firstChild = svgChildren1;
+    const secondChild = svgChildren2;
+    const nextSibling = svgChildren2.nextSibling;
 
     if (parentNode) {
-        parentNode.insertBefore(svgChildren2, svgChildren1);
+        parentNode.insertBefore(secondChild, firstChild);
+        parentNode.insertBefore(firstChild, nextSibling);
     }
 
     const first = svgChildren1.transform.baseVal.getItem(0);

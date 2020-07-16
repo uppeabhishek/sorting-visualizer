@@ -112,7 +112,7 @@ export const ArrayBlocks: FunctionComponent = () => {
 
     const dispatch = useDispatch();
 
-    const animationSpeed = useSelector((state: RootState) => state.globals.animationSpeed)*5;
+    const animationSpeed = useSelector((state: RootState) => state.globals.animationSpeed) * 5;
 
     const defaultAlgorithm = useSelector((state: RootState) => state.globals.algorithm);
 
