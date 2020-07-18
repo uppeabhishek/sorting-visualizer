@@ -5,15 +5,17 @@ import {
     CHANGE_ARRAY_TYPE,
     CHANGE_ARRAY_SIZE,
     CHANGE_ANIMATION_SPEED,
-    SORT_ALGORITHM
+    SORT_ALGORITHM,
+    PAUSE_EXECUTION
 } from "../actions/globals/types";
 
 const initialState: GlobalState = {
-    algorithm: "Insertion Sort",
+    algorithm: "Bubble Sort",
     animationSpeed: 50,
     arraySize: 50,
     arrayType: "Randomize",
-    sort: false
+    sort: false,
+    pause: false
 };
 
 const globals = (state = initialState, action: GlobalTypes): GlobalState => {
@@ -47,6 +49,12 @@ const globals = (state = initialState, action: GlobalTypes): GlobalState => {
                 ...state,
                 sort: action.sort
             };
+        }
+        case PAUSE_EXECUTION: {
+            return {
+                ...state,
+                pause: action.pause
+            }
         }
         default: {
             return {

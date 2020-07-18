@@ -3,12 +3,14 @@ export const CHANGE_ARRAY_SIZE = "CHANGE_ARRAY_SIZE";
 export const CHANGE_ANIMATION_SPEED = "CHANGE_ANIMATION_SPEED";
 export const CHANGE_ARRAY_TYPE = "CHANGE_ARRAY_TYPE";
 export const SORT_ALGORITHM = "SORT_ALGORITHM";
+export const PAUSE_EXECUTION = "PAUSE_EXECUTION";
 
 export type AlgorithmType = string;
 export type ArraySize = number;
 export type AnimationSpeed = number;
 export type ArrayType = string;
 export type SortAlgorithm = boolean;
+export type PauseExecution = boolean;
 
 export interface ChangeDefaultAlgorithm {
     type: typeof CHANGE_DEFAULT_ALGORITHM;
@@ -32,12 +34,19 @@ export interface SortAlgorithmType {
     sort: SortAlgorithm;
 }
 
+export interface PauseExecutionType {
+    type: typeof PAUSE_EXECUTION;
+    pause: PauseExecution;
+}
+
+
 export type GlobalTypes =
     | ChangeDefaultAlgorithm
     | ChangeArraySize
     | ChangeAnimationSpeed
     | ChangeArrayType
-    | SortAlgorithmType;
+    | SortAlgorithmType
+    | PauseExecutionType;
 
 export interface GlobalState {
     algorithm: AlgorithmType;
@@ -45,4 +54,5 @@ export interface GlobalState {
     animationSpeed: AnimationSpeed;
     arrayType: ArrayType;
     sort: SortAlgorithm;
+    pause: PauseExecution;
 }

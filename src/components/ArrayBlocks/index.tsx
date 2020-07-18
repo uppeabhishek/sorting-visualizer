@@ -74,36 +74,34 @@ export const ArrayBlocks: FunctionComponent = () => {
         setArrayElements(arrayTypes(arrayType));
     }, [arrayType]);
 
-    const paddingLeftRight = useRef(80);
+    const marginLeftRight = useRef(40);
 
-    const paddingTopBottom = useRef(40);
+    const marginTopBottom = useRef(20);
 
     const len = arrayElements.length;
 
     // Subtract top and bottom margin
-    const height = remainingHeightWidth[0] - paddingTopBottom.current * 2;
+    const height = remainingHeightWidth[0] - marginTopBottom.current * 2;
 
     // Subtract left and right margin
-    const width = remainingHeightWidth[1] - paddingLeftRight.current * 2;
+    const width = remainingHeightWidth[1] - marginLeftRight.current * 2;
 
     const eachElementWidth = width / len;
 
     const [innerWidth, innerHeight] = useWindowSize();
 
     useEffect(() => {
-        const header = document.querySelector("header");
-
-        if (header) {
-            setRemainingHeightWidth([innerHeight - header.offsetHeight, innerWidth]);
+        const item = document.querySelector(".svg-block") as HTMLElement;
+        if (item) {
+            setRemainingHeightWidth([item.clientHeight, item.clientWidth]);
         }
     }, [innerWidth, innerHeight]);
 
     useEffect(() => {
-        const header = document.querySelector("header");
-        const body = document.querySelector("body");
+        const item = document.querySelector(".svg-block") as HTMLElement;
 
-        if (header && body) {
-            setRemainingHeightWidth([innerHeight - header.offsetHeight, innerWidth]);
+        if (item) {
+            setRemainingHeightWidth([item.clientHeight, item.clientWidth]);
         }
     }, []);
 
@@ -147,6 +145,7 @@ export const ArrayBlocks: FunctionComponent = () => {
                 case "Insertion Sort":
                     InsertionSort(arrayElements, svgChildren, animationSpeed).then((ele) => {
                         if (ele) {
+                            dispatch(sortAlgorithm(false));
                         }
                     });
                     break;
@@ -156,53 +155,52 @@ export const ArrayBlocks: FunctionComponent = () => {
         }
     }, [isSorting]);
 
-    return remainingHeightWidth[0] !== 0 ? (
-        <svg
-            ref={svgRef}
-            height={height}
-            style={{
-                paddingBottom: paddingTopBottom.current,
-                paddingLeft: paddingLeftRight.current,
-                paddingRight: paddingLeftRight.current,
-                paddingTop: paddingTopBottom.current
-            }}
-            width={width}
-            xmlns="http://www.w3.org/2000/svg"
-        >
-            {arrayElements.map((eachElement: number, index: number) => {
-                const eachElementHeight = (eachElement * height) / maxRange.current;
-
-                return (
-                    <g
-                        // eslint-disable-line react/no-array-index-key
-                        key={index}
-                        // eslint-enable-line react/no-array-index-key
-                        transform={`translate(${index * eachElementWidth} ${
-                            height - eachElementHeight
-                        })`}
-                    >
-                        <rect
-                            height={eachElementHeight}
-                            style={{
-                                fill: arrayItemOriginalColor,
-                                stroke: "pink",
-                                strokeOpacity: 0.9,
-                                strokeWidth: 2
-                            }}
-                            width={eachElementWidth}
-                        />
-                        {/* <text
-                            style={{ fill: "white" }}
-                            x={index * eachElementWidth + eachElementWidth / 2}
-                            y={height - eachElementHeight + 50}
+    return (
+        <div className="svg-block">
+            <svg
+                key={defaultAlgorithm.toString() + isSorting}
+                ref={svgRef}
+                height={"100%"}
+                style={{
+                    marginTop: marginTopBottom.current - 5,
+                    marginBottom: marginTopBottom.current - 5,
+                    marginLeft: marginLeftRight.current,
+                    marginRight: marginLeftRight.current,
+                    
+                }}
+                width={"100%"}
+                xmlns="http://www.w3.org/2000/svg"
+            >
+                {arrayElements.map((eachElement: number, index: number) => {
+                    const eachElementHeight = (eachElement * height) / maxRange.current;
+                    return (
+                        <g
+                            key={(index * eachElementWidth).toString() + (height - eachElementHeight).toString()}
+                            transform={`translate(${index * eachElementWidth} ${
+                                height - eachElementHeight
+                            })`}
                         >
-                            {eachElement}
-                        </text> */}
-                    </g>
-                );
-            })}
-        </svg>
-    ) : (
-        <div />
+                            <rect
+                                height={eachElementHeight}
+                                style={{
+                                    fill: arrayItemOriginalColor,
+                                    stroke: "pink",
+                                    strokeOpacity: 0.9,
+                                    strokeWidth: 2
+                                }}
+                                width={eachElementWidth}
+                            />
+                            {/* <text
+                                style={{ fill: "white" }}
+                                x={index * eachElementWidth + eachElementWidth / 2}
+                                y={height - eachElementHeight + 50}
+                            >
+                                {eachElement}
+                            </text> */}
+                        </g>
+                    );
+                })}
+            </svg>
+        </div>
     );
 };

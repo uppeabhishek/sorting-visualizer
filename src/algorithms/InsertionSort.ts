@@ -4,7 +4,6 @@ import {
     arrayItemNotEqualColor,
     arrayItemCurrentPositionColor,
     arrayItemEqualColor,
-    arrayItemSortedColor,
     swapSVGNodes
 } from "../commonUtilities";
 
@@ -79,14 +78,6 @@ export async function InsertionSort(
                 }
             }
         }
-
-        // for (let i=0; i<len; i++) {
-        //     const currentElement = svgChildren[i].children as HTMLCollectionOf<
-        //                 SVGRectElement | SVGTextElement>;
-        //     currentElement[i].style.fill = arrayItemSortedColor;
-        //     await timer(animationSpeed);
-        //     console.log(i);
-        // }
     }
 
     function func() {

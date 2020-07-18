@@ -14,11 +14,9 @@ export async function BubbleSort(
     animationSpeed: number
 ) {
     const len = arr.length;
-
     /*
      * Let isSwapped = false;
      */
-
     async function sort() {
         for (let i = 0; i < len; i++) {
             for (let j = 0; j < len - i - 1; j++) {

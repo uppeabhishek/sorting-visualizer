@@ -40,9 +40,49 @@ header {
     display: flex;
     justify-content: space-between;
     padding: 20px 10px;
+    max-width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
     margin: 0;
     height: auto;
     background-color: var(--bg-color-overlay);
+}
+
+.main-blocks {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+}
+
+.main-blocks .information {
+    border: 1px solid grey;
+    width: 300px;
+    padding: 10px;
+    margin: 10px 0;
+}
+
+.main-blocks .information .item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px;
+}
+
+.main-blocks .svg-block {
+    flex: 1;
+}
+
+button {
+    height: 40px;
+    color: white;
+    text-transform: uppercase;
+    border: 2px solid white;
+    background-color: #2d83cd;
+    min-width: 100px;
+}
+
+button:hover {
+    background-color: white;
+    color: #2d83cd;
 }
 
 i {
@@ -104,4 +144,15 @@ button {
 svg,
 g {
     transition: all 0.7s ease-in-out;
+}
+
+.controls {
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+select {
+    padding: 8px; 
 }

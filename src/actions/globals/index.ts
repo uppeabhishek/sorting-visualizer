@@ -9,7 +9,9 @@ import {
     CHANGE_ANIMATION_SPEED,
     CHANGE_ARRAY_TYPE,
     SortAlgorithm,
-    SORT_ALGORITHM
+    SORT_ALGORITHM,
+    PAUSE_EXECUTION,
+    PauseExecution
 } from "./types";
 
 export const changeDefaultAlgorithm = (algorithm: AlgorithmType): GlobalTypes => ({
@@ -35,4 +37,9 @@ export const changeArrayType = (arrayType: ArrayType): GlobalTypes => ({
 export const sortAlgorithm = (sort: SortAlgorithm): GlobalTypes => ({
     sort,
     type: SORT_ALGORITHM
+});
+
+export const pauseExecution = (pause: PauseExecution): GlobalTypes => ({
+    pause,
+    type: PAUSE_EXECUTION
 });
