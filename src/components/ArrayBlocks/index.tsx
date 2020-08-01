@@ -8,6 +8,7 @@ import { getRandom, shuffle } from "../../commonUtilities";
 import { arrayItemOriginalColor } from "../../commonUtilities";
 import { sortAlgorithm } from "../../actions/globals";
 import { InsertionSort } from "../../algorithms/InsertionSort";
+import { MergeSort } from "../../algorithms/MergeSort";
 
 export const ArrayBlocks: FunctionComponent = () => {
     let arraySize = useSelector((state: RootState) => state.globals.arraySize);
@@ -185,6 +186,12 @@ export const ArrayBlocks: FunctionComponent = () => {
                         }
                     });
                     break;
+                case "Merge Sort":
+                    MergeSort(arrayElements, svgChildren, animationSpeed).then((ele) => {
+                        if (ele) {
+                            // dispatch(sortAlgorithm(false));
+                        }
+                    });
                 default:
                     break;
             }
@@ -211,9 +218,10 @@ export const ArrayBlocks: FunctionComponent = () => {
                     const eachElementHeight = (eachElement * height) / maxRange.current;
                     return (
                         <g
+                            style={{textAlign: "center"}}
                             key={(index * eachElementWidth).toString() + (height - eachElementHeight).toString()}
                             transform={`translate(${index * eachElementWidth} ${
-                                height - eachElementHeight
+                               height - eachElementHeight
                             })`}
                         >
                             <rect
@@ -226,13 +234,15 @@ export const ArrayBlocks: FunctionComponent = () => {
                                 }}
                                 width={eachElementWidth}
                             />
-                            {/* <text
+                            <text
+                                textAnchor="middle" 
+                                alignmentBaseline="central"
+                                x={eachElementWidth/2}
+                                y={eachElementHeight/2}
                                 style={{ fill: "white" }}
-                                x={index * eachElementWidth + eachElementWidth / 2}
-                                y={height - eachElementHeight + 50}
                             >
-                                {eachElement}
-                            </text> */}
+                                {eachElementWidth > 23 ? eachElement : ''}
+                            </text>
                         </g>
                     );
                 })}

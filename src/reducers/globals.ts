@@ -10,7 +10,7 @@ import {
 } from "../actions/globals/types";
 
 const initialState: GlobalState = {
-    algorithm: "Bubble Sort",
+    algorithm: "Merge Sort",
     animationSpeed: 50,
     arraySize: 50,
     arrayType: "Randomize",
