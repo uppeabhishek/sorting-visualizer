@@ -8,6 +8,28 @@ export function timer(ms: number) {
     return new Promise((res) => setTimeout(res, ms));
 }
 
+export function getRandom(min: number, max: number): number {
+    const mi = Math.ceil(min);
+    const ma = Math.floor(max);
+
+    // The maximum is exclusive and the minimum is inclusive
+    return Math.floor(Math.random() * (ma - mi + 1)) + mi;
+}
+
+
+export function shuffle(arr: Array<any>) {
+    const le = arr.length;
+
+    for (let i = le - 1; i > 0; i--) {
+        const rI = getRandom(0, i - 1);
+
+        [arr[i], arr[rI]] = [arr[rI], arr[i]];
+    }
+
+    return arr;
+}
+
+
 export function swapSVGNodes(svgChildren1: SVGGElement, svgChildren2: SVGGElement) {
     const { parentNode } = svgChildren1;
 

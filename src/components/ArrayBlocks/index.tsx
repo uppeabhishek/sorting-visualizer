@@ -4,7 +4,7 @@ import { RootState } from "../../reducers";
 import { useWindowSize } from "../../hooks/useWindowSize";
 import { BubbleSort } from "../../algorithms/BubbleSort";
 import { SelectionSort } from "../../algorithms/SelectionSort";
-import { getRandomInt } from "../Helper";
+import { getRandom, shuffle } from "../../commonUtilities";
 import { arrayItemOriginalColor } from "../../commonUtilities";
 import { sortAlgorithm } from "../../actions/globals";
 import { InsertionSort } from "../../algorithms/InsertionSort";
@@ -36,16 +36,52 @@ export const ArrayBlocks: FunctionComponent = () => {
         const size = Math.ceil(arraySize / divisor.current);
 
         for (let i = 0; i < size; i++) {
-            array.push(getRandomInt(minRange.current, maxRange.current));
+            array.push(getRandom(minRange.current, maxRange.current));
         }
 
         return array;
     }
 
+    function almostSortElements(si: number, ei: number, sortedElements: Array<number>) {
+        console.log(si,ei);
+
+        let temp = [];
+
+                
+        for (let i=si; i<ei; i++){
+            temp.push(sortedElements[i]);
+        }
+
+        temp = shuffle(temp);
+
+        let index = 0;
+
+        for (let i=si; i<ei; i++){
+            sortedElements[i] = temp[index++];
+        }
+    }
+
     function arrayTypes(type: string) {
         const dict = {
             "Almost Sorted": function () {
-                return getRandomArrayElements();
+                let sortedElements;
+
+                if (getRandom(0, 1) === 0) {
+                    sortedElements = getRandomArrayElements().sort(function (a, b) {
+                        return a - b;
+                    });
+                }
+                else {
+                    sortedElements = getRandomArrayElements().sort(function (a, b) {
+                        return b - a;
+                    });
+                }
+                
+                almostSortElements(0, Math.floor(sortedElements.length / 6), sortedElements);
+
+                almostSortElements(Math.ceil(sortedElements.length / 1.25), sortedElements.length, sortedElements);
+                
+                return sortedElements;
             },
             Decreasing() {
                 return getRandomArrayElements().sort(function (a, b) {
