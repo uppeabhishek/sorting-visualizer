@@ -14,27 +14,28 @@ export async function MergeSort(
 ) {
     const len = array.length;
 
-    async function MergeHelper(array: Array<number>, low: number, mid: number,  high: number) {
-        console.log(low, mid, high) 
-        
+    async function MergeHelper(array: Array<number>, low: number, mid: number, high: number) {
+        console.log(low, mid, high);
+
         const firstSize = mid - low + 1;
         const secondSize = high - mid;
 
         const firstArray = new Array(firstSize);
         const secondArray = new Array(secondSize);
 
-        for (let i = 0; i<firstSize; i++) {
-            firstArray[i] = array[low+i];
+        for (let i = 0; i < firstSize; i++) {
+            firstArray[i] = array[low + i];
         }
 
-        for (let i = 0; i<secondSize; i++) {
-            secondArray[i] = array[mid+i+1];
+        for (let i = 0; i < secondSize; i++) {
+            secondArray[i] = array[mid + i + 1];
         }
 
-        let i = 0, j = 0, k = low;
+        let i = 0;
+        let j = 0;
+        let k = low;
 
         while (i < firstSize && j < secondSize) {
-            
             const first = svgChildren[i].children as HTMLCollectionOf<
                 SVGRectElement | SVGTextElement
             >;
@@ -52,47 +53,44 @@ export async function MergeSort(
 
             await timer(animationSpeed);
 
-
             if (firstArray[i] <= secondArray[j]) {
-                 // Indicate these cells are currently being sorted
+                // Indicate these cells are currently being sorted
                 firstRect.style.fill = arrayItemNotEqualColor;
                 secondRect.style.fill = arrayItemNotEqualColor;
 
                 await timer(animationSpeed);
 
-                // swapSVGNodes(svgChildren[i], svgChildren[k]);
+                // SwapSVGNodes(svgChildren[i], svgChildren[k]);
 
                 array[k++] = firstArray[i];
-                i+=1;
-            }
-            else {
-                 // Indicate these cells are currently being sorted
+                i += 1;
+            } else {
+                // Indicate these cells are currently being sorted
                 firstRect.style.fill = arrayItemEqualColor;
                 secondRect.style.fill = arrayItemEqualColor;
 
                 await timer(animationSpeed);
 
-                // swapSVGNodes(svgChildren[j], svgChildren[k]);
+                // SwapSVGNodes(svgChildren[j], svgChildren[k]);
 
                 array[k++] = secondArray[j];
-                j+=1;
+                j += 1;
             }
         }
 
         while (i < firstSize) {
-
             const first = svgChildren[i].children as HTMLCollectionOf<
                 SVGRectElement | SVGTextElement
             >;
             const firstRect = first[0];
 
-            // swapSVGNodes(svgChildren[i], svgChildren[k]);
+            // SwapSVGNodes(svgChildren[i], svgChildren[k]);
             firstRect.style.fill = arrayItemEqualColor;
 
             await timer(animationSpeed);
 
             array[k++] = firstArray[i];
-            i+=1;
+            i += 1;
         }
 
         while (j < secondSize) {
@@ -105,9 +103,9 @@ export async function MergeSort(
 
             await timer(animationSpeed);
 
-            // swapSVGNodes(svgChildren[j], svgChildren[k]);
+            // SwapSVGNodes(svgChildren[j], svgChildren[k]);
             array[k++] = secondArray[j];
-            j+=1;
+            j += 1;
         }
     }
 
@@ -115,14 +113,15 @@ export async function MergeSort(
         if (low >= high) {
             return;
         }
-        const mid = Math.floor((low + (high-low) / 2));
+        const mid = Math.floor(low + (high - low) / 2);
+
         await MergeSortHelper(array, low, mid);
-        await MergeSortHelper(array, mid+1, high);
+        await MergeSortHelper(array, mid + 1, high);
         await MergeHelper(array, low, mid, high);
     }
 
     async function sort() {
-        await MergeSortHelper(array, 0, len-1); 
+        await MergeSortHelper(array, 0, len - 1);
     }
 
     function func() {

@@ -4,7 +4,6 @@ import { RootState } from "../../reducers";
 import { pauseExecution } from "../../actions/globals";
 
 export const Controls: FunctionComponent = () => {
-
     const isSorting = useSelector((state: RootState) => state.globals.sort);
 
     const pause = useSelector((state: RootState) => state.globals.pause);
@@ -13,9 +12,13 @@ export const Controls: FunctionComponent = () => {
 
     return (
         <div className="controls">
-            <button type="button" className={isSorting ? "" :"disabled"} onClick={() => dispatch(pauseExecution(!pause))}>
-                { !pause ? "Pause" : "Play" }
+            <button
+                className={isSorting ? "" : "disabled"}
+                type="button"
+                onClick={() => dispatch(pauseExecution(!pause))}
+            >
+                {!pause ? "Pause" : "Play"}
             </button>
         </div>
-    )
-}
+    );
+};

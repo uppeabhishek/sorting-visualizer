@@ -22,6 +22,7 @@ export const AnimationSlider: FunctionComponent = () => {
                     : "d-flex flex-column justify-center align-center"
             }
         >
+            <div>Animation Speed</div>
             <div className="d-flex justify-center align-center">
                 <div>Slow</div>
                 <input
@@ -34,7 +35,6 @@ export const AnimationSlider: FunctionComponent = () => {
                 />
                 <div>Fast</div>
             </div>
-            <div>Animation Speed</div>
         </div>
     );
 };

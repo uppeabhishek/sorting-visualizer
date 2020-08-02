@@ -16,15 +16,18 @@ export const ArrayTypes: FunctionComponent = () => {
     }
 
     return (
-        <select
-            key={arrayType}
-            className={isSorting ? "disabled" : ""}
-            value={arrayType}
-            onChange={changeArrayTypeFunc}
-        >
-            {types.map((type) => (
-                <option key={type}>{type}</option>
-            ))}
-        </select>
+        <div>
+            <div>Select Array Type</div>
+            <select
+                key={arrayType}
+                className={isSorting ? "disabled" : ""}
+                value={arrayType}
+                onChange={changeArrayTypeFunc}
+            >
+                {types.map((type) => (
+                    <option key={type}>{type}</option>
+                ))}
+            </select>
+        </div>
     );
 };

@@ -10,7 +10,7 @@ import {
 } from "../actions/globals/types";
 
 const initialState: GlobalState = {
-    algorithm: "Merge Sort",
+    algorithm: "Quick Sort",
     animationSpeed: 50,
     arraySize: 50,
     arrayType: "Randomize",
@@ -54,7 +54,7 @@ const globals = (state = initialState, action: GlobalTypes): GlobalState => {
             return {
                 ...state,
                 pause: action.pause
-            }
+            };
         }
         default: {
             return {

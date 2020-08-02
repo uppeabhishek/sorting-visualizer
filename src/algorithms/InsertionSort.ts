@@ -4,7 +4,8 @@ import {
     arrayItemNotEqualColor,
     arrayItemCurrentPositionColor,
     arrayItemEqualColor,
-    swapSVGNodes
+    swapSVGNodes,
+    fillColor
 } from "../commonUtilities";
 
 export async function InsertionSort(
@@ -21,7 +22,7 @@ export async function InsertionSort(
 
         minElement[0].style.fill = arrayItemEqualColor;
 
-        timer(animationSpeed);
+        await timer(animationSpeed);
 
         let i;
 
@@ -36,18 +37,14 @@ export async function InsertionSort(
             for (let j = 0; j <= i; j++) {
                 currentSVGElement[0].style.fill = arrayItemCurrentPositionColor;
 
-                const secondElement = svgChildren[j].children as HTMLCollectionOf<
-                    SVGRectElement | SVGTextElement
-                >;
-
-                secondElement[0].style.fill = arrayItemCurrentPositionColor;
+                fillColor(svgChildren, j, arrayItemCurrentPositionColor);
 
                 await timer(animationSpeed);
 
                 if (currentElement < arr[j]) {
                     currentSVGElement[0].style.fill = arrayItemNotEqualColor;
 
-                    secondElement[0].style.fill = arrayItemNotEqualColor;
+                    fillColor(svgChildren, j, arrayItemNotEqualColor);
 
                     await timer(animationSpeed);
 
@@ -58,7 +55,8 @@ export async function InsertionSort(
                     swapSVGNodes(svgChildren[j], svgChildren[currentElementIndex]);
 
                     currentSVGElement[0].style.fill = arrayItemOriginalColor;
-                    secondElement[0].style.fill = arrayItemOriginalColor;
+
+                    fillColor(svgChildren, j, arrayItemOriginalColor);
 
                     await timer(animationSpeed);
 
@@ -66,13 +64,14 @@ export async function InsertionSort(
                         SVGRectElement | SVGTextElement
                     >;
                     currentElementIndex = i;
-
                 } else {
-                    secondElement[0].style.fill = arrayItemEqualColor;
+                    fillColor(svgChildren, j, arrayItemEqualColor);
+
                     await timer(animationSpeed);
 
                     currentSVGElement[0].style.fill = arrayItemOriginalColor;
-                    secondElement[0].style.fill = arrayItemOriginalColor;
+
+                    fillColor(svgChildren, j, arrayItemOriginalColor);
 
                     await timer(animationSpeed);
                 }

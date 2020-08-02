@@ -6,10 +6,6 @@ import { changeDefaultAlgorithm } from "../../actions/globals";
 export const AlgorithmToggle: FunctionComponent = () => {
     const algorithms = useRef([
         {
-            minifiedName: "MER",
-            name: "Merge Sort"
-        },
-        {
             minifiedName: "QUI",
             name: "Quick Sort"
         },
@@ -24,6 +20,10 @@ export const AlgorithmToggle: FunctionComponent = () => {
         {
             minifiedName: "INS",
             name: "Insertion Sort"
+        },
+        {
+            minifiedName: "MER",
+            name: "Merge Sort"
         }
     ]);
 

@@ -4,7 +4,8 @@ import {
     arrayItemCurrentPositionColor,
     arrayItemEqualColor,
     arrayItemSortedColor,
-    swapSVGNodes
+    swapSVGNodes,
+    fillColor
 } from "../commonUtilities";
 
 export async function SelectionSort(
@@ -64,11 +65,7 @@ export async function SelectionSort(
         }
 
         // Paint last element as sorted
-        const firstRect = svgChildren[i].children as HTMLCollectionOf<
-            SVGRectElement | SVGTextElement
-        >;
-
-        firstRect[0].style.fill = arrayItemSortedColor;
+        fillColor(svgChildren, i, arrayItemSortedColor);
     }
 
     function func() {

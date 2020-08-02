@@ -22,7 +22,7 @@
         "comment-empty-line-before": "always",
         "rule-empty-line-before": "always",
         "selector-pseudo-class-parentheses-space-inside": "always",
-        "selector-max-universal": 0,
+        "selector-max-universal": 1,
         "media-feature-range-operator-space-before": "never",
         "media-feature-range-operator-space-after": "always",
         "media-feature-colon-space-after": "always"

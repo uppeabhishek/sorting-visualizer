@@ -16,6 +16,15 @@ export function getRandom(min: number, max: number): number {
     return Math.floor(Math.random() * (ma - mi + 1)) + mi;
 }
 
+export function fillColor(
+    svgChildren: HTMLCollectionOf<SVGGElement>,
+    index: number,
+    color: string
+) {
+    const rect = svgChildren[index].children as HTMLCollectionOf<SVGRectElement | SVGTextElement>;
+
+    rect[0].style.fill = color;
+}
 
 export function shuffle(arr: Array<any>) {
     const le = arr.length;
@@ -28,7 +37,6 @@ export function shuffle(arr: Array<any>) {
 
     return arr;
 }
-
 
 export function swapSVGNodes(svgChildren1: SVGGElement, svgChildren2: SVGGElement) {
     const { parentNode } = svgChildren1;

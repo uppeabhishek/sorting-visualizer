@@ -4,11 +4,12 @@ import { RootState } from "../../reducers";
 import { useWindowSize } from "../../hooks/useWindowSize";
 import { BubbleSort } from "../../algorithms/BubbleSort";
 import { SelectionSort } from "../../algorithms/SelectionSort";
-import { getRandom, shuffle } from "../../commonUtilities";
-import { arrayItemOriginalColor } from "../../commonUtilities";
+import { getRandom, shuffle, arrayItemOriginalColor } from "../../commonUtilities";
+
 import { sortAlgorithm } from "../../actions/globals";
 import { InsertionSort } from "../../algorithms/InsertionSort";
 import { MergeSort } from "../../algorithms/MergeSort";
+import { QuickSort } from "../../algorithms/QuickSort";
 
 export const ArrayBlocks: FunctionComponent = () => {
     let arraySize = useSelector((state: RootState) => state.globals.arraySize);
@@ -44,12 +45,9 @@ export const ArrayBlocks: FunctionComponent = () => {
     }
 
     function almostSortElements(si: number, ei: number, sortedElements: Array<number>) {
-        console.log(si,ei);
-
         let temp = [];
 
-                
-        for (let i=si; i<ei; i++){
+        for (let i = si; i < ei; i++) {
             temp.push(sortedElements[i]);
         }
 
@@ -57,7 +55,7 @@ export const ArrayBlocks: FunctionComponent = () => {
 
         let index = 0;
 
-        for (let i=si; i<ei; i++){
+        for (let i = si; i < ei; i++) {
             sortedElements[i] = temp[index++];
         }
     }
@@ -71,17 +69,20 @@ export const ArrayBlocks: FunctionComponent = () => {
                     sortedElements = getRandomArrayElements().sort(function (a, b) {
                         return a - b;
                     });
-                }
-                else {
+                } else {
                     sortedElements = getRandomArrayElements().sort(function (a, b) {
                         return b - a;
                     });
                 }
-                
+
                 almostSortElements(0, Math.floor(sortedElements.length / 6), sortedElements);
 
-                almostSortElements(Math.ceil(sortedElements.length / 1.25), sortedElements.length, sortedElements);
-                
+                almostSortElements(
+                    Math.ceil(sortedElements.length / 1.25),
+                    sortedElements.length,
+                    sortedElements
+                );
+
                 return sortedElements;
             },
             Decreasing() {
@@ -111,7 +112,7 @@ export const ArrayBlocks: FunctionComponent = () => {
         setArrayElements(arrayTypes(arrayType));
     }, [arrayType]);
 
-    const marginLeftRight = useRef(40);
+    const marginLeftRight = useRef(20);
 
     const marginTopBottom = useRef(20);
 
@@ -129,6 +130,7 @@ export const ArrayBlocks: FunctionComponent = () => {
 
     useEffect(() => {
         const item = document.querySelector(".svg-block") as HTMLElement;
+
         if (item) {
             setRemainingHeightWidth([item.clientHeight, item.clientWidth]);
         }
@@ -189,9 +191,17 @@ export const ArrayBlocks: FunctionComponent = () => {
                 case "Merge Sort":
                     MergeSort(arrayElements, svgChildren, animationSpeed).then((ele) => {
                         if (ele) {
-                            // dispatch(sortAlgorithm(false));
+                            // Dispatch(sortAlgorithm(false));
                         }
                     });
+                    break;
+                case "Quick Sort":
+                    QuickSort(arrayElements, svgChildren, animationSpeed).then((ele) => {
+                        if (ele) {
+                            dispatch(sortAlgorithm(false));
+                        }
+                    });
+                    break;
                 default:
                     break;
             }
@@ -199,29 +209,33 @@ export const ArrayBlocks: FunctionComponent = () => {
     }, [isSorting]);
 
     return (
-        <div className="svg-block">
+        <div
+            className="svg-block"
+            style={{
+                marginTop: marginTopBottom.current,
+                marginBottom: marginTopBottom.current,
+                marginLeft: marginLeftRight.current,
+                marginRight: marginLeftRight.current
+            }}
+        >
             <svg
                 key={defaultAlgorithm.toString() + isSorting}
                 ref={svgRef}
-                height={"100%"}
-                style={{
-                    marginTop: marginTopBottom.current - 5,
-                    marginBottom: marginTopBottom.current - 5,
-                    marginLeft: marginLeftRight.current,
-                    marginRight: marginLeftRight.current,
-                    
-                }}
-                width={"100%"}
+                height="100%"
+                width="100%"
                 xmlns="http://www.w3.org/2000/svg"
             >
                 {arrayElements.map((eachElement: number, index: number) => {
                     const eachElementHeight = (eachElement * height) / maxRange.current;
+
                     return (
                         <g
-                            style={{textAlign: "center"}}
-                            key={(index * eachElementWidth).toString() + (height - eachElementHeight).toString()}
+                            key={
+                                (index * eachElementWidth).toString() +
+                                (height - eachElementHeight).toString()
+                            }
                             transform={`translate(${index * eachElementWidth} ${
-                               height - eachElementHeight
+                                height - eachElementHeight
                             })`}
                         >
                             <rect
@@ -235,13 +249,13 @@ export const ArrayBlocks: FunctionComponent = () => {
                                 width={eachElementWidth}
                             />
                             <text
-                                textAnchor="middle" 
                                 alignmentBaseline="central"
-                                x={eachElementWidth/2}
-                                y={eachElementHeight/2}
                                 style={{ fill: "white" }}
+                                textAnchor="middle"
+                                x={eachElementWidth / 2}
+                                y={eachElementHeight / 2}
                             >
-                                {eachElementWidth > 23 ? eachElement : ''}
+                                {eachElementWidth > 23 ? eachElement : ""}
                             </text>
                         </g>
                     );

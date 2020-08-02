@@ -39,7 +39,6 @@ export interface PauseExecutionType {
     pause: PauseExecution;
 }
 
-
 export type GlobalTypes =
     | ChangeDefaultAlgorithm
     | ChangeArraySize

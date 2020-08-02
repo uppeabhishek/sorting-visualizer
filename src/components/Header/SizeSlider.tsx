@@ -15,6 +15,7 @@ export const SizeSlider: FunctionComponent = () => {
 
     return (
         <div>
+            <div>Change Array Size</div>
             <input
                 className={isSorting ? "disabled" : ""}
                 max="100"
@@ -24,7 +25,6 @@ export const SizeSlider: FunctionComponent = () => {
                 value={arraySize}
                 onChange={changeArraySizeFunc}
             />
-            <div>Change Array Size</div>
         </div>
     );
 };

@@ -9,7 +9,11 @@ export const SortButton: FunctionComponent = () => {
     const isSorting = useSelector((state: RootState) => state.globals.sort);
 
     return (
-        <button type="button" className={isSorting?"disabled":''} onClick={() => dispatch(sortAlgorithm(true))}>
+        <button
+            className={isSorting ? "disabled" : ""}
+            type="button"
+            onClick={() => dispatch(sortAlgorithm(true))}
+        >
             Sort
         </button>
     );
