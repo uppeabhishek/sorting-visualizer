@@ -2,6 +2,7 @@ import React, { ReactElement } from "react";
 import { Header } from "./components/Header";
 import { ArrayBlocks } from "./components/ArrayBlocks";
 import { Information } from "./components/Information";
+import Tutorial from "./Tutorial";
 
 function App(): ReactElement {
     // Const [isLoading, toggleLoading] = useState(false);
@@ -34,6 +35,7 @@ function App(): ReactElement {
         <>
             <Header />
             <div className="main-blocks">
+                <Tutorial />
                 <Information />
                 <ArrayBlocks key="1" />
             </div>

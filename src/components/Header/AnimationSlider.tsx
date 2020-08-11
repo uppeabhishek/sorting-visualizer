@@ -1,5 +1,6 @@
 import React, { FunctionComponent, ChangeEvent } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Slider, Typography } from "@material-ui/core";
 import { RootState } from "../../reducers";
 import { changeAnimationSpeed } from "../../actions/globals";
 
@@ -8,33 +9,35 @@ export const AnimationSlider: FunctionComponent = () => {
 
     const animationSpeed = useSelector((state: RootState) => state.globals.animationSpeed);
 
-    function changeAnimationSpeedFunc(e: ChangeEvent<HTMLInputElement>) {
-        dispatch(changeAnimationSpeed(parseInt(e.currentTarget.value, 10)));
+    function changeAnimationSpeedFunc(event: ChangeEvent<{}>, value: number | number[]) {
+        if (typeof value === "number") {
+            dispatch(changeAnimationSpeed(value));
+        }
+    }
+
+    function getAnimationSpeed(value: number) {
+        return value.toString();
     }
 
     const isSorting = useSelector((state: RootState) => state.globals.sort);
 
     return (
-        <div
-            className={
-                isSorting
-                    ? "disabled d-flex flex-column justify-center align-center"
-                    : "d-flex flex-column justify-center align-center"
-            }
-        >
-            <div>Animation Speed</div>
-            <div className="d-flex justify-center align-center">
-                <div>Slow</div>
-                <input
-                    max="90"
-                    min="10"
-                    style={{ cursor: "pointer" }}
-                    type="range"
-                    value={animationSpeed}
-                    onChange={changeAnimationSpeedFunc}
-                />
-                <div>Fast</div>
-            </div>
+        <div>
+            <Typography color="textPrimary" gutterBottom={true} id="animationSpeedSlider">
+                Animation Speed
+            </Typography>
+            <Slider
+                aria-labelledby="animationSpeedSliderr"
+                disabled={isSorting}
+                getAriaValueText={getAnimationSpeed}
+                marks={true}
+                max={90}
+                min={10}
+                step={10}
+                value={animationSpeed}
+                valueLabelDisplay="off"
+                onChange={changeAnimationSpeedFunc}
+            />
         </div>
     );
 };

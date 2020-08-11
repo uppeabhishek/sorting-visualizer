@@ -1,5 +1,6 @@
 import React, { FunctionComponent, ChangeEvent } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { Typography, Slider } from "@material-ui/core";
 import { RootState } from "../../reducers";
 import { changeArraySize } from "../../actions/globals";
 
@@ -9,20 +10,31 @@ export const SizeSlider: FunctionComponent = () => {
 
     const dispatch = useDispatch();
 
-    function changeArraySizeFunc(e: ChangeEvent<HTMLInputElement>) {
-        dispatch(changeArraySize(parseInt(e.currentTarget.value, 10)));
+    function changeArraySizeFunc(event: ChangeEvent<{}>, value: number | number[]) {
+        if (typeof value === "number") {
+            dispatch(changeArraySize(value));
+        }
+    }
+
+    function getArraySize(value: number) {
+        return value.toString();
     }
 
     return (
         <div>
-            <div>Change Array Size</div>
-            <input
-                className={isSorting ? "disabled" : ""}
-                max="100"
-                min="1"
-                style={{ cursor: "pointer" }}
-                type="range"
+            <Typography color="textPrimary" gutterBottom={true} id="arraySizeSlider">
+                Array Size
+            </Typography>
+            <Slider
+                aria-labelledby="arraySizeSlider"
+                disabled={isSorting}
+                getAriaValueText={getArraySize}
+                marks={true}
+                max={90}
+                min={10}
+                step={10}
                 value={arraySize}
+                valueLabelDisplay="off"
                 onChange={changeArraySizeFunc}
             />
         </div>
