@@ -52,7 +52,7 @@ const Info: FunctionComponent<{ activeStep: number }> = ({ activeStep }) => {
                 </ul>
 
                 <div>
-                    To choose an intial state of array, pick an array type from "Array Type" drop
+                    To choose an intial state of array, pick an array type from <b>Array Type</b> drop
                     down menu.
                 </div>
                 <div className="center-items" style={{ marginTop: 10 }}>
@@ -65,7 +65,7 @@ const Info: FunctionComponent<{ activeStep: number }> = ({ activeStep }) => {
                 <Typography variant="h6">Array Size</Typography>
                 <br />
 
-                <div>To change array size use the "Array Size" Slider.</div>
+                <div>To change array size use the <b>Array Size</b> Slider.</div>
                 <div className="center-items" style={{ marginTop: 10 }}>
                     {/* <img src={algorithmDropDown} /> */}
                 </div>
@@ -76,7 +76,7 @@ const Info: FunctionComponent<{ activeStep: number }> = ({ activeStep }) => {
                 <Typography variant="h6">Animation Speed</Typography>
                 <br />
 
-                <div>To change animation speed use the "Animation Speed" Slider.</div>
+                <div>To change animation speed use the <b>Animation Speed</b> Slider.</div>
                 <div className="center-items" style={{ marginTop: 10 }}>
                     {/* <img src={algorithmDropDown} /> */}
                 </div>
@@ -87,7 +87,7 @@ const Info: FunctionComponent<{ activeStep: number }> = ({ activeStep }) => {
                 <Typography variant="h6">Visualize</Typography>
                 <br />
 
-                <div>To Visualize the algorithm. Click "Sort"</div>
+                <div>To Visualize the algorithm. Click <b>Sort</b></div>
                 <div className="center-items" style={{ marginTop: 10 }}>
                     {/* <img src={algorithmDropDown} /> */}
                 </div>
