@@ -1,4 +1,23 @@
-<h2>Sorting Visualizer</h2>  
-<p>This Project demonstrates various sorting algorithms visually.</p>
-<a href="https://uppeabhishek.github.io/sorting-visualizer/">Sorting Visualizer</a>
-<p><span style='font-size:100px;'>&#9733;</span> if you find it interesting and helpful! </p>
+### SORTING VISUALIZER
+
+<br />
+In this project I have implemented various sorting algorithms which can be visualized.
+
+### Features
+
+<ul>
+<li>
+Users can manually select an algorithm from the given list of algorithms.
+</li>
+<li>
+We can initialize the array either in increasing, decreasing, random (or) almost sorted manner.
+</li>
+<li>
+Change animation speed as needed.
+</li>
+<li>
+Visualize the algorithm
+</li>
+</ul>
+
+[Demo URL](https://uppeabhishek.github.io/sorting-visualizer/)
