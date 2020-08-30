@@ -4,12 +4,20 @@ import { RootState } from "../../reducers";
 import { useWindowSize } from "../../hooks/useWindowSize";
 import { BubbleSort } from "../../algorithms/BubbleSort";
 import { SelectionSort } from "../../algorithms/SelectionSort";
-import { getRandom, shuffle, arrayItemOriginalColor } from "../../commonUtilities";
+import {
+    getRandom,
+    shuffle,
+    arrayItemOriginalColor,
+    fillColor,
+    arrayItemSortedColor
+} from "../../commonUtilities";
 
 import { sortAlgorithm } from "../../actions/globals";
 import { InsertionSort } from "../../algorithms/InsertionSort";
 import { MergeSort } from "../../algorithms/MergeSort";
 import { QuickSort } from "../../algorithms/QuickSort";
+import { Snackbar } from "@material-ui/core";
+import MuiAlert, { AlertProps } from "@material-ui/lab/Alert";
 
 export const ArrayBlocks: FunctionComponent = () => {
     let arraySize = useSelector((state: RootState) => state.globals.arraySize);
@@ -153,9 +161,33 @@ export const ArrayBlocks: FunctionComponent = () => {
     let animationSpeed = useSelector((state: RootState) => state.globals.animationSpeed);
 
     // As animationSpeed increase decrease its value because slow ---> fast
-    animationSpeed = 10 * (100 - animationSpeed);
+    animationSpeed = 7 * (100 - animationSpeed);
 
     const defaultAlgorithm = useSelector((state: RootState) => state.globals.algorithm);
+
+    const [isSnackBarOpen, toggleSnackBar] = useState(false);
+
+    function Alert(props: AlertProps) {
+        return <MuiAlert elevation={6} variant="filled" {...props} />;
+    }
+
+    function afterSorting(): void {
+        // @ts-ignore
+        let svgChildren: HTMLCollectionOf<SVGGElement> = null;
+
+        if (svgRef.current) {
+            svgChildren = svgRef.current.children as HTMLCollectionOf<SVGGElement>;
+        }
+
+        for (let i = 0; i < svgChildren.length; i++) {
+            fillColor(svgChildren, i, arrayItemSortedColor);
+        }
+
+        setTimeout(() => {
+            toggleSnackBar(true);
+            dispatch(sortAlgorithm(false));
+        }, 1000);
+    }
 
     useEffect(() => {
         if (isSorting && svgRef) {
@@ -170,35 +202,35 @@ export const ArrayBlocks: FunctionComponent = () => {
                 case "Bubble Sort":
                     BubbleSort(arrayElements, svgChildren, animationSpeed).then((ele) => {
                         if (ele) {
-                            dispatch(sortAlgorithm(false));
+                            afterSorting();
                         }
                     });
                     break;
                 case "Selection Sort":
                     SelectionSort(arrayElements, svgChildren, animationSpeed).then((ele) => {
                         if (ele) {
-                            dispatch(sortAlgorithm(false));
+                            afterSorting();
                         }
                     });
                     break;
                 case "Insertion Sort":
                     InsertionSort(arrayElements, svgChildren, animationSpeed).then((ele) => {
                         if (ele) {
-                            dispatch(sortAlgorithm(false));
+                            afterSorting();
                         }
                     });
                     break;
                 case "Merge Sort":
-                    MergeSort(arrayElements, svgChildren, animationSpeed).then((ele) => {
+                    QuickSort(arrayElements, svgChildren, animationSpeed).then((ele) => {
                         if (ele) {
-                            // Dispatch(sortAlgorithm(false));
+                            afterSorting();
                         }
                     });
                     break;
                 case "Quick Sort":
                     QuickSort(arrayElements, svgChildren, animationSpeed).then((ele) => {
                         if (ele) {
-                            dispatch(sortAlgorithm(false));
+                            afterSorting();
                         }
                     });
                     break;
@@ -218,6 +250,16 @@ export const ArrayBlocks: FunctionComponent = () => {
                 marginRight: marginLeftRight.current
             }}
         >
+            <Snackbar
+                open={isSnackBarOpen}
+                autoHideDuration={2000}
+                anchorOrigin={{ vertical: "top", horizontal: "right" }}
+                onClose={() => toggleSnackBar(false)}
+            >
+                <Alert onClose={() => toggleSnackBar(false)} severity="success">
+                    Sorting Completed
+                </Alert>
+            </Snackbar>
             <svg
                 key={defaultAlgorithm.toString() + isSorting}
                 ref={svgRef}

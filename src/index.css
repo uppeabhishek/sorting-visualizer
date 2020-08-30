@@ -65,13 +65,17 @@ header .title {
 }
 
 .main-blocks .information {
+    margin: 10px 0;
+    display: flex;
+}
+
+.main-blocks .information .colors {
     border: 1px solid grey;
     width: 300px;
     padding: 10px;
-    margin: 10px 0;
 }
 
-.main-blocks .information .item {
+.main-blocks .information .colors .item {
     display: flex;
     justify-content: space-between;
     margin-bottom: 5px;
@@ -79,6 +83,20 @@ header .title {
 
 .main-blocks .svg-block {
     flex: 1;
+}
+
+.sorting-fact {
+    font-size: 1rem;
+    margin-bottom: 20px;
+}
+
+.sorting-algorithm-info {
+    padding: 0 10px;
+}
+
+.time-info,
+.space-info {
+    padding-inline-start: 40px;
 }
 
 button {
@@ -94,6 +112,18 @@ button {
 button:hover {
     background-color: white;
     color: #2d83cd;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td,
+th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 4px;
 }
 
 i {
@@ -162,4 +192,19 @@ g {
 
 select {
     padding: 8px;
+}
+
+.MuiSlider-root,
+.MuiSelect-root,
+.MuiSelect-icon {
+    color: white !important;
+}
+
+.Mui-disabled {
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+.MuiSelect-icon {
+    border-bottom: white;
 }

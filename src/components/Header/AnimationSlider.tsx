@@ -23,10 +23,11 @@ export const AnimationSlider: FunctionComponent = () => {
 
     return (
         <div>
-            <Typography color="textPrimary" gutterBottom={true} id="animationSpeedSlider">
+            <Typography color="inherit" gutterBottom={true} id="animationSpeedSlider">
                 Animation Speed
             </Typography>
             <Slider
+                color="primary"
                 aria-labelledby="animationSpeedSliderr"
                 disabled={isSorting}
                 getAriaValueText={getAnimationSpeed}

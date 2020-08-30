@@ -22,7 +22,7 @@ export const SizeSlider: FunctionComponent = () => {
 
     return (
         <div>
-            <Typography color="textPrimary" gutterBottom={true} id="arraySizeSlider">
+            <Typography color="inherit" gutterBottom={true} id="arraySizeSlider">
                 Array Size
             </Typography>
             <Slider

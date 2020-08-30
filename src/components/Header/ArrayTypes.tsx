@@ -1,7 +1,6 @@
-import React, { FunctionComponent, ChangeEvent } from "react";
+import React, { FunctionComponent } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import InputLabel from "@material-ui/core/InputLabel";
-import { MenuItem, Select } from "@material-ui/core";
+import { MenuItem, Select, Typography } from "@material-ui/core";
 import { changeArrayType } from "../../actions/globals";
 import { RootState } from "../../reducers";
 
@@ -19,8 +18,11 @@ export const ArrayTypes: FunctionComponent = () => {
 
     return (
         <div>
-            <InputLabel id="select">Array Type</InputLabel>
+            <Typography id="select" color="inherit">
+                Array Type
+            </Typography>
             <Select
+                color="primary"
                 disabled={isSorting}
                 id="select"
                 labelId="select"
@@ -28,7 +30,9 @@ export const ArrayTypes: FunctionComponent = () => {
                 onChange={handleChange}
             >
                 {types.map((type) => (
-                    <MenuItem value={type}>{type}</MenuItem>
+                    <MenuItem value={type} key={type}>
+                        {type}
+                    </MenuItem>
                 ))}
             </Select>
         </div>
