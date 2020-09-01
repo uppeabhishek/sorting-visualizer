@@ -16,11 +16,10 @@ export async function BubbleSort(
 ) {
     const len = arr.length;
 
-    /*
-     * Let isSwapped = false;
-     */
     async function sort() {
         for (let i = 0; i < len; i++) {
+            let IsSwapped = false;
+
             for (let j = 0; j < len - i - 1; j++) {
                 // Indicate these cells are currently being sorted
                 fillColor(svgChildren, j, arrayItemCurrentPositionColor);
@@ -29,6 +28,8 @@ export async function BubbleSort(
                 await timer(animationSpeed);
 
                 if (arr[j] > arr[j + 1]) {
+                    IsSwapped = true;
+
                     // If they are not in correct position
                     fillColor(svgChildren, j, arrayItemNotEqualColor);
                     fillColor(svgChildren, j + 1, arrayItemNotEqualColor);
@@ -55,6 +56,10 @@ export async function BubbleSort(
             }
 
             fillColor(svgChildren, len - i - 1, arrayItemSortedColor);
+
+            if (!IsSwapped) {
+                break;
+            }
         }
     }
 
