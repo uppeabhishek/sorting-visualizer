@@ -10,6 +10,10 @@ export const AlgorithmToggle: FunctionComponent = () => {
             name: "Quick Sort"
         },
         {
+            minifiedName: "MER",
+            name: "Merge Sort"
+        },
+        {
             minifiedName: "BUB",
             name: "Bubble Sort"
         },
@@ -20,10 +24,6 @@ export const AlgorithmToggle: FunctionComponent = () => {
         {
             minifiedName: "INS",
             name: "Insertion Sort"
-        },
-        {
-            minifiedName: "MER",
-            name: "Merge Sort"
         }
     ]);
 

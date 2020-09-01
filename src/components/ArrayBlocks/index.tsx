@@ -221,7 +221,7 @@ export const ArrayBlocks: FunctionComponent = () => {
                     });
                     break;
                 case "Merge Sort":
-                    QuickSort(arrayElements, svgChildren, animationSpeed).then((ele) => {
+                    MergeSort(arrayElements, svgChildren, animationSpeed, height).then((ele) => {
                         if (ele) {
                             afterSorting();
                         }

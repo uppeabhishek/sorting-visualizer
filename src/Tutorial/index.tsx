@@ -99,6 +99,7 @@ export default function Tutorial() {
     return (
         <div>
             <Dialog
+                disableBackdropClick
                 aria-labelledby="customized-dialog-title"
                 fullWidth={true}
                 open={open}

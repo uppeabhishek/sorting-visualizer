@@ -1,37 +1,52 @@
 import {
     timer,
     arrayItemOriginalColor,
-    arrayItemNotEqualColor,
     arrayItemCurrentPositionColor,
     arrayItemEqualColor,
-    swapSVGNodes,
     arrayItemSortedColor
 } from "../commonUtilities";
 
 export async function MergeSort(
     array: number[],
     svgChildren: HTMLCollectionOf<SVGGElement>,
-    animationSpeed: number
+    animationSpeed: number,
+    svgHeight: number
 ) {
     const len = array.length;
 
-    function swapNodes(i: number, j: number) {
-        swapSVGNodes(svgChildren[i], svgChildren[j]);
+    function swapNodes(i: number, j: number, arrayNodes: Array<HTMLElement>) {
+        const first = svgChildren[i],
+            second = arrayNodes[j];
+        const height = second.children[0].getAttribute("height") as string;
 
-        // if (i<j) {
-        //     console.log(i, j, array);
-        //     if (array[i] > array[j]) {
-        //         console.log("gone");
-        //         swapSVGNodes(svgChildren[i], svgChildren[j]);
-        //     }
-        // }
-        // else {
-        //     console.log(i, j, array);
-        //     if (array[i] < array[j]) {
-        //         console.log("gone");
-        //         swapSVGNodes(svgChildren[j], svgChildren[i]);
-        //     }
-        // }
+        const tempTransform1 = first.getAttribute("transform");
+        const tempTransform2 = first.getAttribute("transform");
+
+        let resultTransform = "";
+
+        let resultTransform2 = 0;
+
+        if (tempTransform1) {
+            resultTransform = tempTransform1.split("(")[1].split(" ")[0];
+
+            const temp = tempTransform1.split("(")[1].split(" ")[1];
+
+            resultTransform2 = parseInt(temp.substring(0, temp.length - 2));
+        }
+
+        if (height && svgHeight - parseInt(height) !== resultTransform2) {
+            first.setAttribute(
+                "transform",
+                `translate(${resultTransform} ${svgHeight - parseInt(height)})`
+            );
+            first.children[0].setAttribute("height", height);
+            first.children[1].innerHTML = second.children[1].innerHTML;
+            first.children[1].setAttribute("y", (parseInt(height) / 2).toString());
+
+            return true;
+        }
+
+        return false;
     }
 
     async function MergeHelper(array: Array<number>, low: number, mid: number, high: number) {
@@ -44,14 +59,19 @@ export async function MergeSort(
         const firstArrayPosition = new Array(firstSize);
         const secondArrayPosition = new Array(secondSize);
 
+        const firstArrayNodes = new Array(firstSize);
+        const secondArrayNodes = new Array(secondSize);
+
         for (let i = 0; i < firstSize; i++) {
             firstArray[i] = array[low + i];
             firstArrayPosition[i] = low + i;
+            firstArrayNodes[i] = svgChildren[low + i].cloneNode(true);
         }
 
         for (let i = 0; i < secondSize; i++) {
             secondArray[i] = array[mid + i + 1];
             secondArrayPosition[i] = mid + i + 1;
+            secondArrayNodes[i] = svgChildren[mid + i + 1].cloneNode(true);
         }
 
         let i = 0;
@@ -59,92 +79,107 @@ export async function MergeSort(
         let k = low;
 
         while (i < firstSize && j < secondSize) {
-            const first = svgChildren[i].children as HTMLCollectionOf<
+            const first = svgChildren[firstArrayPosition[i]].children as HTMLCollectionOf<
                 SVGRectElement | SVGTextElement
             >;
 
-            const second = svgChildren[j].children as HTMLCollectionOf<
+            const second = svgChildren[secondArrayPosition[j]].children as HTMLCollectionOf<
                 SVGRectElement | SVGTextElement
             >;
 
-            // const firstRect = first[0];
-            // const secondRect = second[0];
+            const firstRect = first[0];
+            const secondRect = second[0];
 
-            // // Indicate these cells are currently being sorted
-            // firstRect.style.fill = arrayItemCurrentPositionColor;
-            // secondRect.style.fill = arrayItemCurrentPositionColor;
+            firstRect.style.fill = arrayItemCurrentPositionColor;
+            secondRect.style.fill = arrayItemCurrentPositionColor;
 
-            // await timer(animationSpeed);
+            await timer(animationSpeed);
 
             if (firstArray[i] <= secondArray[j]) {
-                // Indicate these cells are currently being sorted
-                // firstRect.style.fill = arrayItemNotEqualColor;
-                // secondRect.style.fill = arrayItemNotEqualColor;
+                const res = swapNodes(k, i, firstArrayNodes);
 
-                // await timer(animationSpeed);
+                if (res) {
+                    firstRect.style.fill = arrayItemSortedColor;
+                } else {
+                    firstRect.style.fill = arrayItemEqualColor;
+                }
 
-                // swapSVGNodes(svgChildren[i], svgChildren[k]);
-
-                swapNodes(k, firstArrayPosition[i]);
+                await timer(animationSpeed);
 
                 array[k++] = firstArray[i];
 
-                console.log(array);
-
                 i += 1;
+
+                firstRect.style.fill = arrayItemOriginalColor;
+                secondRect.style.fill = arrayItemOriginalColor;
             } else {
-                // Indicate these cells are currently being sorted
-                // firstRect.style.fill = arrayItemEqualColor;
-                // secondRect.style.fill = arrayItemEqualColor;
+                const res = swapNodes(k, j, secondArrayNodes);
 
-                // await timer(animationSpeed);
+                if (res) {
+                    secondRect.style.fill = arrayItemSortedColor;
+                } else {
+                    secondRect.style.fill = arrayItemEqualColor;
+                }
 
-                swapNodes(k, secondArrayPosition[j]);
+                await timer(animationSpeed);
 
                 array[k++] = secondArray[j];
 
-                console.log(array);
-
                 j += 1;
+
+                firstRect.style.fill = arrayItemOriginalColor;
+                secondRect.style.fill = arrayItemOriginalColor;
             }
         }
 
         while (i < firstSize) {
-            // const first = svgChildren[i].children as HTMLCollectionOf<
-            //     SVGRectElement | SVGTextElement
-            // >;
-            // const firstRect = first[0];
+            const first = svgChildren[firstArrayPosition[i]].children as HTMLCollectionOf<
+                SVGRectElement | SVGTextElement
+            >;
 
-            // firstRect.style.fill = arrayItemEqualColor;
+            const firstRect = first[0];
 
-            // await timer(animationSpeed);
+            const res = swapNodes(k, i, firstArrayNodes);
 
-            swapNodes(k, firstArrayPosition[i]);
+            if (res) {
+                firstRect.style.fill = arrayItemSortedColor;
+            } else {
+                firstRect.style.fill = arrayItemEqualColor;
+            }
+
+            firstRect.style.fill = arrayItemSortedColor;
+
+            await timer(animationSpeed);
 
             array[k++] = firstArray[i];
 
-            console.log(array);
-
             i += 1;
+
+            firstRect.style.fill = arrayItemOriginalColor;
         }
 
         while (j < secondSize) {
-            // const first = svgChildren[j].children as HTMLCollectionOf<
-            //     SVGRectElement | SVGTextElement
-            // >;
-            // const firstRect = first[0];
+            const second = svgChildren[secondArrayPosition[j]].children as HTMLCollectionOf<
+                SVGRectElement | SVGTextElement
+            >;
 
-            // firstRect.style.fill = arrayItemEqualColor;
+            const secondRect = second[0];
 
-            // await timer(animationSpeed);
+            const res = swapNodes(k, j, secondArrayNodes);
 
-            swapNodes(k, secondArrayPosition[j]);
+            if (res) {
+                secondRect.style.fill = arrayItemSortedColor;
+            } else {
+                secondRect.style.fill = arrayItemEqualColor;
+            }
+
+            await timer(animationSpeed);
 
             array[k++] = secondArray[j];
 
-            console.log(array);
-
             j += 1;
+
+            secondRect.style.fill = arrayItemOriginalColor;
         }
     }
 
