@@ -1,27 +1,27 @@
 {
   "files": {
     "main.css": "/sorting-visualizer/static/css/main.aee6df51.chunk.css",
-    "main.js": "/sorting-visualizer/static/js/main.84dc6626.chunk.js",
-    "main.js.map": "/sorting-visualizer/static/js/main.84dc6626.chunk.js.map",
+    "main.js": "/sorting-visualizer/static/js/main.0087547d.chunk.js",
+    "main.js.map": "/sorting-visualizer/static/js/main.0087547d.chunk.js.map",
     "runtime-main.js": "/sorting-visualizer/static/js/runtime-main.2a14b4db.js",
     "runtime-main.js.map": "/sorting-visualizer/static/js/runtime-main.2a14b4db.js.map",
     "static/css/2.d555d8db.chunk.css": "/sorting-visualizer/static/css/2.d555d8db.chunk.css",
-    "static/js/2.001721d3.chunk.js": "/sorting-visualizer/static/js/2.001721d3.chunk.js",
-    "static/js/2.001721d3.chunk.js.map": "/sorting-visualizer/static/js/2.001721d3.chunk.js.map",
+    "static/js/2.7bd24c12.chunk.js": "/sorting-visualizer/static/js/2.7bd24c12.chunk.js",
+    "static/js/2.7bd24c12.chunk.js.map": "/sorting-visualizer/static/js/2.7bd24c12.chunk.js.map",
     "index.html": "/sorting-visualizer/index.html",
-    "precache-manifest.1c1dc46504584e62aaa523400c80a806.js": "/sorting-visualizer/precache-manifest.1c1dc46504584e62aaa523400c80a806.js",
+    "precache-manifest.6156b828db6b0bdbe2a4f62f63ecb555.js": "/sorting-visualizer/precache-manifest.6156b828db6b0bdbe2a4f62f63ecb555.js",
     "service-worker.js": "/sorting-visualizer/service-worker.js",
     "static/css/2.d555d8db.chunk.css.map": "/sorting-visualizer/static/css/2.d555d8db.chunk.css.map",
     "static/css/main.aee6df51.chunk.css.map": "/sorting-visualizer/static/css/main.aee6df51.chunk.css.map",
-    "static/js/2.001721d3.chunk.js.LICENSE.txt": "/sorting-visualizer/static/js/2.001721d3.chunk.js.LICENSE.txt",
+    "static/js/2.7bd24c12.chunk.js.LICENSE.txt": "/sorting-visualizer/static/js/2.7bd24c12.chunk.js.LICENSE.txt",
     "static/media/font-awesome.min.css": "/sorting-visualizer/static/media/fontawesome-webfont.fee66e71.woff",
     "static/media/index.css": "/sorting-visualizer/static/media/roboto-latin-900italic.ebf6d164.woff2"
   },
   "entrypoints": [
     "static/js/runtime-main.2a14b4db.js",
     "static/css/2.d555d8db.chunk.css",
-    "static/js/2.001721d3.chunk.js",
+    "static/js/2.7bd24c12.chunk.js",
     "static/css/main.aee6df51.chunk.css",
-    "static/js/main.84dc6626.chunk.js"
+    "static/js/main.0087547d.chunk.js"
   ]
 }
