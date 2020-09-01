@@ -20,7 +20,6 @@ export async function MergeSort(
         const height = second.children[0].getAttribute("height") as string;
 
         const tempTransform1 = first.getAttribute("transform");
-        const tempTransform2 = first.getAttribute("transform");
 
         let resultTransform = "";
 
